@@ -1,0 +1,12 @@
+.form {
+    text-align: center;
+    /*
+    importera fonten quicksand 
+    */
+    background-color: lightgray;
+    width: 50%;
+    margin: auto;
+    font-family: 'Quicksand';
+   
+  } 
+  
