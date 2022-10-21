@@ -11,11 +11,7 @@ const FormUI = () => {
         e.preventDefault();
         
     }
-    const [counter, setCounter] = useState(0);
-
-    const handleClick = () => {
-        setCounter(counter +1);
-    }
+    
     
 
     
@@ -29,11 +25,6 @@ const FormUI = () => {
                 <option value="lime">Lime</option>
                 <option selected value="coconut">Coconut</option>
                 <option value="mango">Mango</option>
-                <option onClick ={e => {handleClick(); submit(e)}} value ="other">Other</option>
-                {Array.from(Array(counter)).map((c, index) => {
-                    return <input key={c} type="text"></input>
-                    
-               })}
                </select>
                
             <div id="div1">
