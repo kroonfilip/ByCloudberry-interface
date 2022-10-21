@@ -29,12 +29,14 @@ const FormUI = () => {
                 <option value="lime">Lime</option>
                 <option selected value="coconut">Coconut</option>
                 <option value="mango">Mango</option>
-                <option onClick ={e => {handleClick(); submit(e)}} value ="other">Other</option>
+                
+               </select>
+               <button onClick ={e => {handleClick(); submit(e)}}>
                 {Array.from(Array(counter)).map((c, index) => {
                     return <input key={c} type="text"></input>
                     
                })}
-               </select>
+               Add more products</button>
                
             <div id="div1">
               
