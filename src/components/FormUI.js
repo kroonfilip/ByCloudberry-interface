@@ -1,7 +1,12 @@
 import  {useRef, useState } from 'react';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 import '../components/Form.css'
 import "./style.css";
 import { PopoverPicker } from "./PopoverPicker";
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 
 
@@ -50,62 +55,39 @@ const FormUI = () => {
     let addFormFields = () => {
     setFormValues([...formValues, { name: ""}])
     }
-    let removeFormFields = (i) => {
-        let newFormValues = [...formValues];
-        newFormValues.splice(i, 1);
-        setFormValues(newFormValues)
-    }
-    
-       
-  
 
-    
+    const [value, setValue] = useState("");
+
+    const handle = (e) => {
+        setValue(e.target.value);
+      };
+
+
+
+   
     return (
         <form class="form" onSubmit={e =>{submit(e);handleClick();{addFormFields();}}}>
-            <h2> Add graph data</h2>
+            <h2> Add & Edit Graph Data</h2>
             {formValues.map((element, index) => (
-                <div className="form-inline" key={index}>
-                    <label>Name</label>
-                    <input type="text" name="name" value={element.name || ""} onChange={e => handleChange(index, e)} />
-                   
-                    {
-                index ? 
-                  <button type="button"  className="button remove" onClick={() => removeFormFields(index)}>Remove</button> 
-                : null
-                    }
-                <select>
-                { formValues.map(item => <option>{item.name}</option>) }
-                <option value="Disa Black">Disa Black</option>
-                <option value="Disa Sandy Beach">Disa Sandy Beach</option>
-                <option selected value="Natt Black">Natt Black</option>
-                <option value="Natt Sandy Beach">Natt Sandy Beach</option>
-                <option value="Alve Black">Alve Black</option>
-                <option value="Alve Brown">Alve Brown</option>
-                <option value="Alve Sandy Beach">Alve Sandy Beach</option>
-                <option value="Ask Black">Ask Black</option>
-                <option value="Ask Sandy Beach">Ask Sandy Beach</option>
-                <option value="Wally Black">Wally Black</option>
-                <option value="Wally Sandy Beach">Wally Sandy Beach</option>
-               </select>
 
-               
-
-               
-               
-               
-               
+                <div>
+                    <h4>Products</h4>
+                    <select value={value} onChange={handle}>
+                    <option value="" disabled selected>Select a product</option>
+                    <option value="Disa Black">Disa Black</option>
+                    <option value="Disa Sandy Beach">Disa Sandy Beach</option>
+                    <option value="Natt Black">Natt Black</option>
+                    <option value="Natt Sandy Beach">Natt Sandy Beach</option>
+                    <option value="Alve Sandy Beach">Alve Sandy Beach</option>
+                    <option value="Ask Black">Ask Black</option>
+                    <option value="Ask Sandy Beach">Ask Sandy Beach</option>
+                    <option value="Wally Black">Wally Black</option>
+                    <option value="">Add a product</option>
+                    </select>
                 </div>
+
             ))}
-                
-            <div className="button-section">
-              <button className="button add" type="button" >Add</button>
-              
-            </div>
-                
             
-           
-              
-           
             <label>
             <PopoverPicker color={colorMaterial} onChange={setColorMaterial} />
              Main material value (kg CO2E) 
