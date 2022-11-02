@@ -1,5 +1,5 @@
 import  {useEffect, useRef, useState } from 'react';
-import '../components/Form.css'
+import './Form.css'
 import "./style.css";
 import axios from "axios";
 import ColorPicker from './colorPicker';
@@ -93,7 +93,7 @@ const FormUI = () => {
                <>
 
                
-                <label key={index}>
+                <label key={index.type}>
                  {item.type} (kg CO2E) 
                 <input type="number" step="0.001" min="0.001"  placeholder = {item.amount} ref={(ref) => (inputRef.current[index] = ref)} value={item.value}>
                 </input>
@@ -119,6 +119,25 @@ const FormUI = () => {
     console.log(inputRef.current[0].value)
     console.log(inputRef.current[1].value)
     */
+   function drpdown() {
+    var drpdown = 
+    data.data ? data.map((dt,index) => {
+        return (
+        
+        <option value="product">{dt.name} {dt.color} {dt.bagtype}</option>
+        
+        )
+        
+  }): "";
+   
+   return drpdown;
+   
+
+   }
+   
+   
+   
+   
     return (
        <>
             
@@ -128,12 +147,13 @@ const FormUI = () => {
             <ColorPicker></ColorPicker>
                 <div>
                     <h4>Products</h4>
+                        <select value={value} onChange={handle}>
+                        <option value="" disabled selected>Select a product</option>
+                        <option value="product">{data.name} {data.color} {data.bagtype}</option>
+                        
+                        </select>
+                   
                     
-                    <select value={value} onChange={handle}>
-                    <option value="" disabled selected>Select a product</option>
-                    <option value="product">{data.name} {data.color} {data.bagtype}</option>
-                    
-                    </select>
 
                    
                 </div>
