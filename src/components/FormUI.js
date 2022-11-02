@@ -1,32 +1,49 @@
-import  {useRef, useState } from 'react';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+import  {useEffect, useRef, useState } from 'react';
 import '../components/Form.css'
 import "./style.css";
-import { PopoverPicker } from "./PopoverPicker";
-import Dropdown from 'react-bootstrap/Dropdown';
+import axios from "axios";
+import ColorPicker from './colorPicker';
 
 
+
+
+
+
+/*
+(kg CO2E) 
+<PopoverPicker color={colorMaterial} onChange={setColorMaterial} />
+*/
 
 
 const FormUI = () => {
-
-
-    const inputMaterial = useRef();
-    const inputProduction = useRef();
-    const inputLogistics = useRef();
-    const inputRecycling = useRef();
-    const inputLining = useRef();
-    const inputDetails = useRef();
-    const inputPackaging = useRef();
+   
     
+
+    const url = "https://bycloudberry-server.onrender.com/getbag";
+
+    const [data, setData] = useState("");
+    
+    useEffect(() => {
+        fetchData().then((res) => setData(res.data))
+    }, [])
+    
+    const fetchData = () => {
+        return axios.get("https://bycloudberry-server.onrender.com/getbag", {
+          params: {
+            name: "disa",
+            color: "black",
+            type: "handbag",
+          },
+        });
+    }
+    console.log(data)
+    /*
     function handleClick() {
         console.log(inputMaterial.current.value);
         console.log(inputDetails.current.value)
         
     }
-
+    */
     const submit = (e) => {
         e.preventDefault();
         
@@ -35,14 +52,9 @@ const FormUI = () => {
    
     
     
-    const [colorMaterial, setColorMaterial] = useState("#aabbcc");
-    console.log(colorMaterial)
-    const [colorProduction, setColorProduction] = useState("#aabbcc");
-    const [colorLogistics, setColorLogistics] = useState("#aabbcc");
-    const [colorRecycling, setColorRecycling] = useState("#aabbcc");
-    const [colorLining, setColorLining] = useState("#aabbcc");
-    const [colorDetails, setColorDetails] = useState("#aabbcc");
-    const [colorPackaging, setColorPackaging] = useState("#aabbcc");
+    
+    
+    
 
     const [formValues, setFormValues] = useState([{ name: ""}])
 
@@ -61,88 +73,80 @@ const FormUI = () => {
     const handle = (e) => {
         setValue(e.target.value);
       };
+    
 
+    
 
+    const inputRef = useRef([]);
+    const colorRef = useRef([]);
+    
+    
+    
+    function renderData() {
+        
+        var renderData = data ? data.graphdata.map((item, index) => {
+           
 
+           
+            return (
+                
+               <>
+
+               
+                <label key={index}>
+                 {item.type} (kg CO2E) 
+                <input type="number" step="0.001" min="0.001"  placeholder = {item.amount} ref={(ref) => (inputRef.current[index] = ref)} value={item.value}>
+                </input>
+                </label>
+                <label key={item.color}>
+                    (Hex color)
+                <input placeholder = {item.color} ref={(ref) => (colorRef.current[item.color] = ref)} value={item.value}></input>
+                </label>
+               
+                </>
+            )
+           
+        }): "TOM DATA";
+       
    
+        return renderData;
+        
+    }
+  
+    console.log(inputRef.current)
+    console.log(colorRef.current)
+    /*
+    console.log(inputRef.current[0].value)
+    console.log(inputRef.current[1].value)
+    */
     return (
-        <form class="form" onSubmit={e =>{submit(e);handleClick();{addFormFields();}}}>
+       <>
+            
+            
+            <form  class="form" onSubmit={e =>{submit(e);}}>
             <h2> Add & Edit Graph Data</h2>
-            {formValues.map((element, index) => (
-
+            <ColorPicker></ColorPicker>
                 <div>
                     <h4>Products</h4>
+                    
                     <select value={value} onChange={handle}>
                     <option value="" disabled selected>Select a product</option>
-                    <option value="Disa Black">Disa Black</option>
-                    <option value="Disa Sandy Beach">Disa Sandy Beach</option>
-                    <option value="Natt Black">Natt Black</option>
-                    <option value="Natt Sandy Beach">Natt Sandy Beach</option>
-                    <option value="Alve Sandy Beach">Alve Sandy Beach</option>
-                    <option value="Ask Black">Ask Black</option>
-                    <option value="Ask Sandy Beach">Ask Sandy Beach</option>
-                    <option value="Wally Black">Wally Black</option>
-                    <option value="">Add a product</option>
+                    <option value="product">{data.name} {data.color} {data.bagtype}</option>
+                    
                     </select>
+
+                   
                 </div>
 
-            ))}
             
-            <label>
-            <PopoverPicker color={colorMaterial} onChange={setColorMaterial} />
-             Main material value (kg CO2E) 
-            <br></br>
-            <input type="number" step="0.001" min="0.001"name="Material" ref={inputMaterial} />
-            <br></br>
-            </label>
-            <label>
-            <PopoverPicker color={colorProduction} onChange={setColorProduction} />
-            Production value (kg CO2E)
-            <br></br>
-            <input type="number" step="0.001"  min="0.001"name="Production" ref={inputProduction}/>
-            <br></br>
-            </label>
-            <label>
-            <PopoverPicker color={colorLogistics} onChange={setColorLogistics} />
-            Logistics value (kg CO2E)
-            <br></br>
-            <input type="number" step="0.001"  min="0.001"name="Logistics" ref={inputLogistics}/>
-            <br></br>
-            </label>
-            <label>
-            <PopoverPicker color={colorRecycling} onChange={setColorRecycling} />
-            Recycling value (kg CO2E)
-            <br></br>
-            <input type="number" step="0.001"  min="0.001"name="Recycling" ref={inputRecycling}/>
-            <br></br>
-            </label>
-            <label>
-            <PopoverPicker color={colorLining} onChange={setColorLining} />    
-            Lining value (kg CO2E)
-            <br></br>
-            <input type="number" step="0.001"  min="0.001"name="Lining" ref={inputLining}/>
-            <br></br>
-            </label>
-            <label>
-            <PopoverPicker color={colorDetails} onChange={setColorDetails} />    
-            Details value (kg CO2E)
-            <br></br>
-            <input type="number" step="0.001"  min="0.001"name="Details" ref={inputDetails}/>
-            <br></br>
-            </label>
-            <label>
-            <PopoverPicker color={colorPackaging} onChange={setColorPackaging} />    
-            Packaging value (kg CO2E)
-            <br></br>
-            <input type="number" step="0.001" min="0.001" name="Packaging" ref={inputPackaging}/>
-            <br></br>
-            </label>
+            {renderData()}
+            
             <button value='submit'>Save changes</button>
             
            
             
-            
-        </form>
+            </form>
+            </>
         
       
        
