@@ -28,12 +28,8 @@ const FormUI = () => {
     }, [])
     
     const fetchData = () => {
-        return axios.get("https://bycloudberry-server.onrender.com/getbag", {
-          params: {
-            name: "disa",
-            color: "black",
-            type: "handbag",
-          },
+        return axios.get("https://bycloudberry-server.onrender.com/getbagnames", {
+         
         });
     }
     console.log(data)
@@ -49,12 +45,6 @@ const FormUI = () => {
         
     }
    
-   
-    
-    
-    
-    
-    
 
     const [formValues, setFormValues] = useState([{ name: ""}])
 
@@ -84,10 +74,11 @@ const FormUI = () => {
     
     function renderData() {
         
-        var renderData = data ? data.graphdata.map((item, index) => {
-           
+        var renderData = data ? data.map((item, index) => {
+            const all_products = item.name
 
-           
+            console.log(all_products)
+
             return (
                 
                <>
