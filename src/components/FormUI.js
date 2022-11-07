@@ -5,34 +5,47 @@ import axios from "axios";
 import ColorPicker from './colorPicker';
 
 
-
-
-
-
-/*
-(kg CO2E) 
-<PopoverPicker color={colorMaterial} onChange={setColorMaterial} />
-*/
-
-
 const FormUI = () => {
    
-    
-
     const url = "https://bycloudberry-server.onrender.com/getbag";
 
     const [data, setData] = useState("");
-    
+    const [dataName, setDataName] = useState("");
+
     useEffect(() => {
-        fetchData().then((res) => setData(res.data))
+        fetchData()
     }, [])
+
+    useEffect(() => {
+        fetchDatabyName()
+
+    }, [])
+
+    const fetchData = async() => {
+        const resp = await axios.get("https://bycloudberry-server.onrender.com/getbag", {
+          params: {
+            name: "disa",
+            color: "black",
+            type: "handbag",
+          },
+        });
+        setData(resp)
+        return resp
+    }
     
-    const fetchData = () => {
-        return axios.get("https://bycloudberry-server.onrender.com/getbagnames", {
+    const fetchDatabyName = async () => {
+        const resp = await axios.get("https://bycloudberry-server.onrender.com/getbagnames", {
          
         });
+        console.log(resp)
+        setDataName(resp)
+        return resp
     }
     console.log(data)
+    console.log(dataName)
+
+
+    
     /*
     function handleClick() {
         console.log(inputMaterial.current.value);
@@ -40,11 +53,6 @@ const FormUI = () => {
         
     }
     */
-    const submit = (e) => {
-        e.preventDefault();
-        
-    }
-   
 
     const [formValues, setFormValues] = useState([{ name: ""}])
 
@@ -65,41 +73,33 @@ const FormUI = () => {
       };
     
 
-    
-
     const inputRef = useRef([]);
     const colorRef = useRef([]);
-    
-    
+    const comparisonInput = useRef([]);
     
     function renderData() {
+            var renderData = data ? data.data.graphdata.map((item, index) => {
         
-        var renderData = data ? data.map((item, index) => {
-            const all_products = item.name
+                return (
+                    
+                   <>
+                   
+                    <label key={index}>
+                     {item.type} (kg CO2E) 
+                    <input type="number" step="0.001" min="0.001"  placeholder = {item.amount} ref={(ref) => (inputRef.current[index] = ref)} value={item.value}>
+                    </input>
+                    </label>
+                    <label key={item.color}>
+                        (Hex color)
+                    <input placeholder = {item.color} ref={(ref) => (colorRef.current[item.color] = ref)} value={item.value}></input>
+                    </label>
+                   
+                    </>
 
-            console.log(all_products)
+                )
 
-            return (
-                
-               <>
+            }): "TOM DATA";
 
-               
-                <label key={index.type}>
-                 {item.type} (kg CO2E) 
-                <input type="number" step="0.001" min="0.001"  placeholder = {item.amount} ref={(ref) => (inputRef.current[index] = ref)} value={item.value}>
-                </input>
-                </label>
-                <label key={item.color}>
-                    (Hex color)
-                <input placeholder = {item.color} ref={(ref) => (colorRef.current[item.color] = ref)} value={item.value}></input>
-                </label>
-               
-                </>
-            )
-           
-        }): "TOM DATA";
-       
-   
         return renderData;
         
     }
@@ -110,57 +110,66 @@ const FormUI = () => {
     console.log(inputRef.current[0].value)
     console.log(inputRef.current[1].value)
     */
+
+    function ComparisonData() {
+        
+        var comparisonData = data ? data.data.comparisonData:""
+
+        return (
+            <label>
+                Comparison Data
+               <input type="number" step="0.001" min="0.001" ref={comparisonInput} placeholder= {comparisonData}>        
+               </input>
+            </label>
+
+        )
+
+    }
+    console.log(comparisonInput)
+
    function drpdown() {
-    var drpdown = 
-    data.data ? data.map((dt,index) => {
+
+    var renderData = dataName ? dataName.data.map((item, index) => {
+        const all_products = item
+        console.log(all_products)      
+
         return (
         
-        <option value="product">{dt.name} {dt.color} {dt.bagtype}</option>
+        <option value="product">{all_products}</option>
         
         )
         
   }): "";
    
-   return drpdown;
-   
+  
 
+   return renderData;
+   
    }
-   
-   
-   
-   
+
     return (
        <>
-            
-            
-            <form  class="form" onSubmit={e =>{submit(e);}}>
-            <h2> Add & Edit Graph Data</h2>
-            <ColorPicker></ColorPicker>
-                <div>
-                    <h4>Products</h4>
-                        <select value={value} onChange={handle}>
-                        <option value="" disabled selected>Select a product</option>
-                        <option value="product">{data.name} {data.color} {data.bagtype}</option>
-                        
-                        </select>
-                   
-                    
+         
+        <form  class="form">
+        <h2> Add & Edit Graph Data</h2>
+        <ColorPicker></ColorPicker>
+            <div>
+                <h4>Products</h4>
+                    <select value={value} onChange={handle}>
+                    <option value="" disabled selected>Select a product</option>
+                    {drpdown()}
+                    </select>
+                    {ComparisonData()}
+            </div>
 
-                   
-                </div>
-
-            
             {renderData()}
             
             <button value='submit'>Save changes</button>
-            
            
-            
             </form>
+
             </>
         
-      
-       
     )
 }
 export default FormUI;
