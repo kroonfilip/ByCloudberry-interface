@@ -129,13 +129,15 @@ const FormUI = () => {
 
    function drpdown() {
 
-    var renderData = dataName ? dataName.data.map((item, index) => {
-        const all_products = item
+    var renderData = dataName ? dataName.data.map((item) => {
+        const all_products = item.name
+        const type = item.type
+
         console.log(all_products)      
 
         return (
         
-        <option value="product">{all_products}</option>
+        <option value="product">{all_products} {type}</option>
         
         )
         
