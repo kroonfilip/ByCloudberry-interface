@@ -5,6 +5,7 @@ import axios from "axios";
 import ColorPicker from './colorPicker';
 import api from './test';
 import updateBag from './test';
+import "@fontsource/quicksand"; 
 
 
 const FormUI = () => {
@@ -84,13 +85,13 @@ const FormUI = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         updateBag({name : productValue, bagtype: 'handbag', graphdata: [
-            {type: "Leather", amount: inputRef.current[0].value, color: colorRef.current[0].value},
+            { type: "Leather", amount: inputRef.current[0].value, color: colorRef.current[0].value},
             { type: "Production", amount: inputRef.current[1].value, color: colorRef.current[1].value },
-        {type: "Logistics", amount: inputRef.current[2].value, color: colorRef.current[2].value },
-        { type: "Recycling", amount: inputRef.current[3].value, color: colorRef.current[3].value},
-        { type: "Lining", amount: inputRef.current[4].value, color: colorRef.current[4].value },
-        { type: "Packaging", amount: inputRef.current[5].value, color: colorRef.current[5].value},
-        { type: "Details", amount: inputRef.current[6].value, color: colorRef.current[6].value },
+            { type: "Logistics", amount: inputRef.current[2].value, color: colorRef.current[2].value },
+            { type: "Recycling", amount: inputRef.current[3].value, color: colorRef.current[3].value},
+            { type: "Lining", amount: inputRef.current[4].value, color: colorRef.current[4].value },
+            { type: "Packaging", amount: inputRef.current[5].value, color: colorRef.current[5].value},
+            { type: "Details", amount: inputRef.current[6].value, color: colorRef.current[6].value },
             
             
           ]}).then((res) => {
@@ -258,24 +259,29 @@ const FormUI = () => {
     */
     console.log(comparisonInput)
 
+
+   
+
    function drpdown() {
 
     var renderData = dataName ? dataName.data.map((item) => {
         const all_products = item.name
         const type = item.type
 
+        
         console.log(all_products)      
+        
 
         return (
-        
-        <option value= { {val1:[all_products], val2:[type]}}>{all_products} {type}</option>
-        
+    
+            <option value= {[all_products] [type]}>{all_products} {type}</option>
+           
         
         )
         
+        
   }): "";
    
-  
 
    return renderData;
    
@@ -285,12 +291,19 @@ const FormUI = () => {
        <>
          
         <form  class="form" onSubmit={handleSubmit}>
-        <h2> Add & Edit Graph Data</h2>
-        <ColorPicker></ColorPicker>
             <div>
-                <h4>Products</h4>
+            <div id="hero-image">
+                <div id="hero-text">
+                <h1 id="header" style={{ fontSize: "50px" }}>GRAPH DATA FORM</h1>
+                     
+             </div>
+
+             </div>
+                
+        
+                <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
                     <select value={productValue} onChange={(e) => setValue(e.target.value)} >
-                    <option value="" disabled selected>Select a product</option>
+                    <option value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     {console.log(productValue)}
                     </select>
@@ -298,10 +311,15 @@ const FormUI = () => {
                     <h1>{productValue}</h1>
                     
             </div>
+           
 
             {renderData()}
+
+            <button id="save-button" value='submit'>Save Changes</button>
+
+            <ColorPicker></ColorPicker>
             
-            <button value='submit'>Save changes</button>
+            
            
             </form>
 
