@@ -1,19 +1,68 @@
 body {
     margin: auto;
     padding: 50px;
-    font: normal 18px/1.4 Arial, sans-serif;
+    font-family: "Quicksand";
+    margin:0px;
+    padding:0px;
+    width:100%;
   }
 
-h2 {
-  padding-top:20px;
-  padding-bottom:20px;
+#header {
+  
+  color: white;
 
 }  
+
+select {
+  padding:11px;
+  width:16%;
+
+}
+
+
+#header-products {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+
+#save-button {
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+#hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://i.pinimg.com/originals/25/09/2a/25092adf72f3feb759bbd871948cd6b4.jpg");
+
+  /* Set a specific height */
+  padding-top:190px;
+  padding-bottom:190px;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+
   
   .picker {
     position: relative;
     padding-left: 30px;
     padding-top: 30px;
+    
    
   }
   
@@ -39,6 +88,14 @@ h2 {
 
  label, input {
   display: block;
+  padding:11px;
+  margin: auto;
+  
  }
 
+input {
+  width: 16%;
+  text-align: center;
+  margin-top: 13px;
+}
  
