@@ -302,7 +302,7 @@ const FormUI = () => {
                 
         
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
-                    <select value={productValue} onChange={(e) => setValue(e.target.value)} >
+                    <select style={{ textAlign:'center'}} value={productValue} onChange={(e) => setValue(e.target.value)} >
                     <option value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     {console.log(productValue)}
