@@ -5,7 +5,7 @@ import axios from "axios";
 import ColorPicker from './colorPicker';
 import api from './test';
 import updateBag from './test';
-import "@fontsource/quicksand"; 
+
 
 
 const FormUI = () => {
@@ -28,7 +28,6 @@ const FormUI = () => {
         const resp = await axios.get("https://bycloudberry-server.onrender.com/getbag", {
           params: {
             name: "disa",
-            color: "black",
             type: "handbag",
           },
         });
@@ -64,6 +63,8 @@ const FormUI = () => {
         const colorDetails = colorRef.current[6];
 
         const prodValue = productValue.current
+        const allProductsValue = allProductRef
+        console.log(allProductsValue)
         console.log(prodValue)
         console.log(inputLeather); // 👈️ element here
         console.log(inputProduction)
@@ -153,6 +154,9 @@ const FormUI = () => {
     const inputRef = useRef([]);
     const colorRef = useRef([]);
     const comparisonInput = useRef([]);
+    const allProductRef = useRef();
+    
+    
     
     function renderData() {
             var renderData = data ? data.data.graphdata.map((item, index) => {
@@ -160,16 +164,23 @@ const FormUI = () => {
                 return (
                     
                    <>
-                   
+                    <div className='field'>
                     <label key={index}>
                      {item.type} (kg CO2E) 
+                     <br></br>
                     <input type="number" step="0.001" min="0.001"  placeholder = {item.amount} ref={(ref) => (inputRef.current[index] = ref)} value={item.value}>
                     </input>
+                    
                     </label>
+                    </div>
+                    <div className='field'>
                     <label key={index}>
-                        (Hex color)
+                    {item.type} (Hex color)
+                    <br></br>
                     <input placeholder = {item.color} ref={(ref) => (colorRef.current[index] = ref)} value={item.value}></input>
                     </label>
+                   
+                    </div>
                    
                     </>
 
@@ -194,69 +205,19 @@ const FormUI = () => {
         var comparisonData = data ? data.data.comparisonData:""
 
         return (
+            <div className='field'>
             <label>
                 Comparison Data
+                <br></br>
                <input type="number" step="0.001" min="0.001" ref={comparisonInput} placeholder= {comparisonData}>        
                </input>
             </label>
+            </div>
 
         )
 
     }
-    /*
-    const [leather, SetLeather] = useState("")
-    const [production, SetProduction] = useState("")
-    const [logistics, SetLogistics] = useState("")
-    const [recycling, SetRecycling] = useState("")
-    const [lining, SetLining] = useState("")
-    const [packaging, SetPackaging] = useState("")
-    const [details, SetDetails] = useState("")
-    console.log(leather)
-    useEffect(() => {
-       
-        SetLeather(inputRef[0])
-        
-        SetProduction(inputRef[1])
-       
-        SetLogistics(inputRef[2])
-       
-        SetRecycling(inputRef[3])
-        
-        SetLining(inputRef[4])
-        
-        SetPackaging(inputRef[5])
-        
-        SetDetails(inputRef[6])
-
-    }, [inputRef])
-
-    const [colorLeather, SetColorLeather] = useState("")
-    const [colorProduction, SetColorProduction] = useState("")
-    const [colorLogistics, SetColorLogistics] = useState("")
-    const [colorRecycling, SetColorRecycling] = useState("")
-    const [colorLining, SetColorLining] = useState("")
-    const [colorPackaging, SetColorPackaging] = useState("")
-    const [colorDetails, SetColorDetails] = useState("")
-
-    useEffect(() => {
-       
-        SetColorLeather(colorRef[0])
-        
-        SetColorProduction(colorRef[1])
-       
-        SetColorLogistics(colorRef[2])
-       
-        SetColorRecycling(colorRef[3])
-        
-        SetColorLining(colorRef[4])
-        
-        SetColorPackaging(colorRef[5])
-        
-        SetColorDetails(colorRef[6])
-
-    }, [colorRef])
-    
-    */
+   
     console.log(comparisonInput)
 
 
@@ -274,8 +235,8 @@ const FormUI = () => {
 
         return (
     
-            <option value= {[all_products] [type]}>{all_products} {type}</option>
-           
+            <option value1= {all_products} value2={type} ref={allProductRef}> {all_products} {type}</option>
+            
         
         )
         
@@ -291,7 +252,7 @@ const FormUI = () => {
        <>
          
         <form  class="form" onSubmit={handleSubmit}>
-            <div>
+            
             <div id="hero-image">
                 <div id="hero-text">
                 <h1 id="header" style={{ fontSize: "50px" }}>GRAPH DATA FORM</h1>
@@ -302,25 +263,25 @@ const FormUI = () => {
                 
         
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
-                    <select style={{ textAlign:'center'}} value={productValue} onChange={(e) => setValue(e.target.value)} >
+                    <select style={{ textAlign:'center'}} value={productValue} onChange={e=> {setValue(e.target.value); fetchData();}} >
                     <option value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
-                    {console.log(productValue)}
+                    
                     </select>
-                    {ComparisonData()}
+                    
                     <h1>{productValue}</h1>
                     
-            </div>
+            
            
 
             {renderData()}
-
+            {ComparisonData()}
             <button id="save-button" value='submit'>Save Changes</button>
-
+            <div className='colorPicker'>
             <ColorPicker></ColorPicker>
-            
-            
-           
+            </div>
+
+                   
             </form>
 
             </>

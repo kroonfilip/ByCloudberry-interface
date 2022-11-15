@@ -5,6 +5,8 @@ body {
     margin:0px;
     padding:0px;
     width:100%;
+    
+   
   }
 
 #header {
@@ -15,7 +17,8 @@ body {
 
 select {
   padding:11px;
-  width:16%;
+  width:25%;
+  margin-bottom: 15px;
 
 }
 
@@ -34,10 +37,12 @@ select {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  margin-top: 20px;
+  margin-top: 35px;
   margin-bottom: 20px;
+  display: inline-block;
+ 
+  
 }
 
 
@@ -87,15 +92,37 @@ select {
   }
 
  label, input {
-  display: block;
+  
   padding:11px;
   margin: auto;
-  
+  width: 55%;
+  text-align: center;
  }
 
-input {
-  width: 16%;
+input{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.field > input {
+  width: 50%;
   text-align: center;
-  margin-top: 13px;
+ 
+  
+  
+  
+
+}
+.field{
+  float: left;
+  width: 50%;
+  margin: 0;
+  column-gap: 0;
+  column-gap: normal;
+}
+.colorPicker{
+  width: 100%;
+  margin: auto;
+  padding: 0;
+  margin-top: 50px;
 }
  
