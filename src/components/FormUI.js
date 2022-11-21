@@ -1,23 +1,31 @@
-import  {useEffect, useRef, useState } from 'react';
+import  {React, useEffect, useRef, useState } from 'react';
 import './Form.css'
 import "./style.css";
 import axios from "axios";
 import ColorPicker from './colorPicker';
-import api from './test';
-import updateBag from './test';
+
+import updateBag from './Api';
 
 
 
 const FormUI = () => {
-   
+    
     const url = "https://bycloudberry-server.onrender.com/getbag";
     const postURL = "https://bycloudberry-server.onrender.com/insertbag"
     const [data, setData] = useState("");
     const [dataName, setDataName] = useState("");
+    const [productValue, setValue] = useState("");
+
+
+    const inputRef = useRef([]);
+    const colorRef = useRef([]);
+    const comparisonInput = useRef([]);
+    
+    
 
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [data])
 
     useEffect(() => {
         fetchDatabyName()
@@ -27,10 +35,12 @@ const FormUI = () => {
     const fetchData = async() => {
         const resp = await axios.get("https://bycloudberry-server.onrender.com/getbag", {
           params: {
-            name: "disa",
-            type: "handbag",
+            name: bag.name,
+            type: bag.type,
           },
+          
         });
+        console.log("fetching", bag.name, bag.type)
         setData(resp)
         return resp
     }
@@ -62,10 +72,7 @@ const FormUI = () => {
         const colorPackaging = colorRef.current[5];
         const colorDetails = colorRef.current[6];
 
-        const prodValue = productValue.current
-        const allProductsValue = allProductRef
-        console.log(allProductsValue)
-        console.log(prodValue)
+
         console.log(inputLeather); // 👈️ element here
         console.log(inputProduction)
         console.log(inputLogistics)
@@ -85,7 +92,7 @@ const FormUI = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateBag({name : productValue, bagtype: 'handbag', graphdata: [
+        updateBag({name : "test", bagtype: "handbag", graphdata: [
             { type: "Leather", amount: inputRef.current[0].value, color: colorRef.current[0].value},
             { type: "Production", amount: inputRef.current[1].value, color: colorRef.current[1].value },
             { type: "Logistics", amount: inputRef.current[2].value, color: colorRef.current[2].value },
@@ -100,64 +107,11 @@ const FormUI = () => {
           });
         }
         
-    /*
-     function addPosts() {
-        axios
-          .post(postURL, {
-            bagtype: "handbag",
-            name: "Disa",
-            color: "blue",
-            comparisonData: 66.11,
-            
-          })
-          .then((response) => {
-            setData(response.data);
-            console.log(response.data)
-          });
-          
-        
-      }
-    */
-      
-    
-        
-    /*
-    function handleClick() {
-        console.log(inputMaterial.current.value);
-        console.log(inputDetails.current.value)
-        
+    const handleChange = () => {
+        setData(data)
+
     }
-    */
 
-    const [formValues, setFormValues] = useState([{ name: ""}])
-
-    let handleChange = (i, e) => {
-        let newFormValues = [...formValues];
-        newFormValues[i][e.target.name] = e.target.value;
-        setFormValues(newFormValues);
-     }
-
-    
-    const getInitialState = () => {
-        const productValue = data ? data.data.name: ""
-        return productValue
-    }
-    const [productValue, setValue] = useState("");
-/*
-    const handle = (e) => {
-        setValue(e.target.productValue);
-       console.log(e.target.value)
-        
-      };
-    */
-
-    const inputRef = useRef([]);
-    const colorRef = useRef([]);
-    const comparisonInput = useRef([]);
-    const allProductRef = useRef();
-    
-    
-    
     function renderData() {
             var renderData = data ? data.data.graphdata.map((item, index) => {
         
@@ -195,10 +149,7 @@ const FormUI = () => {
     console.log(inputRef.current)
     console.log(colorRef.current)
     
-    /*
-    console.log(inputRef.current[0].value)
-    console.log(inputRef.current[1].value)
-    */
+
 
     function ComparisonData() {
         
@@ -219,10 +170,35 @@ const FormUI = () => {
     }
    
     console.log(comparisonInput)
+    
+    useEffect(() => {
+        storeBags()
+        
+        
+        
+        
 
-
+    }, [])
+    
    
-
+   const [bag, setBag] = useState()
+    function storeBags() {
+        const e = document.getElementById("test");
+        const feedArray = e.value.split(","); 
+        console.log("VÄSKA", feedArray[0]); 
+        console.log("TYP",feedArray[1]);
+        const bag = {
+            type: feedArray[1],
+            name: feedArray[0]
+        }
+        setBag(bag)
+        
+       
+        
+    
+    }
+    console.log(bag)
+    
    function drpdown() {
 
     var renderData = dataName ? dataName.data.map((item) => {
@@ -232,22 +208,23 @@ const FormUI = () => {
         
         console.log(all_products)      
         
-
+        
         return (
     
-            <option value1= {all_products} value2={type} ref={allProductRef}> {all_products} {type}</option>
+            <option  value= {[all_products, type]}> {all_products} {type}</option>
+            
             
         
         )
         
         
   }): "";
-   
-
+  
+  
    return renderData;
    
    }
-
+   
     return (
        <>
          
@@ -263,17 +240,17 @@ const FormUI = () => {
                 
         
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
-                    <select style={{ textAlign:'center'}} value={productValue} onChange={e=> {setValue(e.target.value); fetchData();}} >
+                    <select id="test"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); storeBags(); fetchData(); handleChange() }} >
                     <option value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     
                     </select>
-                    
+                    {console.log(productValue)}
                     <h1>{productValue}</h1>
                     
             
            
-
+            
             {renderData()}
             {ComparisonData()}
             <button id="save-button" value='submit'>Save Changes</button>
