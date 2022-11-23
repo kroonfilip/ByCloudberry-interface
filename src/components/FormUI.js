@@ -91,14 +91,14 @@ const FormUI = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateBag({name : "test", bagtype: "handbag", graphdata: [
-            { type: "Leather", amount: inputRef.current[0].value, color: colorRef.current[0].value},
-            { type: "Production", amount: inputRef.current[1].value, color: colorRef.current[1].value },
-            { type: "Logistics", amount: inputRef.current[2].value, color: colorRef.current[2].value },
-            { type: "Recycling", amount: inputRef.current[3].value, color: colorRef.current[3].value},
-            { type: "Lining", amount: inputRef.current[4].value, color: colorRef.current[4].value },
-            { type: "Packaging", amount: inputRef.current[5].value, color: colorRef.current[5].value},
-            { type: "Details", amount: inputRef.current[6].value, color: colorRef.current[6].value },
+        updateBag({name : "disa", bagtype: "handbag", graphdata: [
+            { type: "Leather", amount: parseInt(inputRef.current[0].value), color: colorRef.current[0].value},
+            { type: "Production", amount: parseInt(inputRef.current[1].value), color: colorRef.current[1].value },
+            { type: "Logistics", amount: parseInt(inputRef.current[2].value), color: colorRef.current[2].value },
+            { type: "Recycling", amount: parseInt(inputRef.current[3].value), color: colorRef.current[3].value},
+            { type: "Lining", amount: parseInt(inputRef.current[4].value), color: colorRef.current[4].value },
+            { type: "Packaging", amount: parseInt(inputRef.current[5].value), color: colorRef.current[5].value},
+            { type: "Details", amount: parseInt(inputRef.current[6].value), color: colorRef.current[6].value },
             
           ]}).then((res) => {
             console.log(res);
