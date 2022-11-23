@@ -91,7 +91,7 @@ const FormUI = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateBag({name : "disa", bagtype: "handbag", graphdata: [
+        updateBag({name : bag.name, bagtype: bag.type, graphdata: [
             { type: "Leather", amount: parseInt(inputRef.current[0].value), color: colorRef.current[0].value},
             { type: "Production", amount: parseInt(inputRef.current[1].value), color: colorRef.current[1].value },
             { type: "Logistics", amount: parseInt(inputRef.current[2].value), color: colorRef.current[2].value },
