@@ -15,33 +15,33 @@ const FormUI = () => {
     const [data, setData] = useState("");
     const [dataName, setDataName] = useState("");
     const [productValue, setValue] = useState("");
+    const [productChosen, setChosen] = useState("");
+    const [bag, setBag] = useState();
+    
 
 
     const inputRef = useRef([]);
     const colorRef = useRef([]);
     const comparisonInput = useRef([]);
     
-    
-
-    useEffect(() => {
-        fetchData()
-    }, [data])
-
     useEffect(() => {
         fetchDatabyName()
 
     }, [])
 
-    const fetchData = async() => {
+    const fetchData = async(value) => {
+        //value has the format of "disa,handbag"
+        //we need to split it into two variables, name and type
+        const [name, type] = value.split(",");
         const resp = await axios.get("https://bycloudberry-server.onrender.com/getbag", {
           params: {
-            name: bag.name,
-            type: bag.type,
+            name: name,
+            type: type,
           },
           
         });
-        console.log("fetching", bag.name, bag.type)
         setData(resp)
+        
         return resp
     }
     
@@ -72,7 +72,6 @@ const FormUI = () => {
         const colorPackaging = colorRef.current[5];
         const colorDetails = colorRef.current[6];
 
-
         console.log(inputLeather); // 👈️ element here
         console.log(inputProduction)
         console.log(inputLogistics)
@@ -92,15 +91,14 @@ const FormUI = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateBag({name : "test", bagtype: "handbag", graphdata: [
-            { type: "Leather", amount: inputRef.current[0].value, color: colorRef.current[0].value},
-            { type: "Production", amount: inputRef.current[1].value, color: colorRef.current[1].value },
-            { type: "Logistics", amount: inputRef.current[2].value, color: colorRef.current[2].value },
-            { type: "Recycling", amount: inputRef.current[3].value, color: colorRef.current[3].value},
-            { type: "Lining", amount: inputRef.current[4].value, color: colorRef.current[4].value },
-            { type: "Packaging", amount: inputRef.current[5].value, color: colorRef.current[5].value},
-            { type: "Details", amount: inputRef.current[6].value, color: colorRef.current[6].value },
-            
+        updateBag({name : bag.name, bagtype: bag.type, graphdata: [
+            { type: "Leather", amount: parseInt(inputRef.current[0].value), color: colorRef.current[0].value},
+            { type: "Production", amount: parseInt(inputRef.current[1].value), color: colorRef.current[1].value },
+            { type: "Logistics", amount: parseInt(inputRef.current[2].value), color: colorRef.current[2].value },
+            { type: "Recycling", amount: parseInt(inputRef.current[3].value), color: colorRef.current[3].value},
+            { type: "Lining", amount: parseInt(inputRef.current[4].value), color: colorRef.current[4].value },
+            { type: "Packaging", amount: parseInt(inputRef.current[5].value), color: colorRef.current[5].value},
+            { type: "Details", amount: parseInt(inputRef.current[6].value), color: colorRef.current[6].value },
             
           ]}).then((res) => {
             console.log(res);
@@ -171,55 +169,38 @@ const FormUI = () => {
    
     console.log(comparisonInput)
     
-    useEffect(() => {
-        storeBags()
+    // useEffect(() => {
+    //     storeBags()
         
         
         
         
 
-    }, [])
-    
-   
-   const [bag, setBag] = useState()
-    function storeBags() {
-        const e = document.getElementById("test");
-        const feedArray = e.value.split(","); 
-        console.log("VÄSKA", feedArray[0]); 
-        console.log("TYP",feedArray[1]);
-        const bag = {
-            type: feedArray[1],
-            name: feedArray[0]
-        }
-        setBag(bag)
+    // }, [])
+
+    function setCurrentBag(value) {
+       //value has the format of "disa,bagtype"
+       // we need to split it into two variables name and type in that order
+         var name = value.split(",")[0]
+        var type = value.split(",")[1]
+        const bag = {name: name, type: type};
+        setBag(bag);
         
-       
-        
-    
     }
-    console.log(bag)
-    
+     
    function drpdown() {
 
-    var renderData = dataName ? dataName.data.map((item) => {
+        var renderData = dataName ? dataName.data.map((item) => {
         const all_products = item.name
         const type = item.type
 
-        
         console.log(all_products)      
         
-        
         return (
-    
             <option  value= {[all_products, type]}> {all_products} {type}</option>
-            
-            
-        
         )
         
-        
   }): "";
-  
   
    return renderData;
    
@@ -234,13 +215,11 @@ const FormUI = () => {
                 <div id="hero-text">
                 <h1 id="header" style={{ fontSize: "50px" }}>GRAPH DATA FORM</h1>
                      
-             </div>
-
+                </div>
              </div>
                 
-        
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
-                    <select id="test"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); storeBags(); fetchData(); handleChange() }} >
+                    <select id="test"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); setCurrentBag(e.target.value); handleChange(); fetchData(e.target.value);  }} >
                     <option value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     
@@ -248,9 +227,6 @@ const FormUI = () => {
                     {console.log(productValue)}
                     <h1>{productValue}</h1>
                     
-            
-           
-            
             {renderData()}
             {ComparisonData()}
             <button id="save-button" value='submit'>Save Changes</button>
@@ -258,11 +234,9 @@ const FormUI = () => {
             <ColorPicker></ColorPicker>
             </div>
 
-                   
             </form>
 
             </>
-        
     )
 }
 export default FormUI;
