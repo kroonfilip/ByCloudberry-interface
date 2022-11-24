@@ -5,6 +5,7 @@ import axios from "axios";
 import ColorPicker from './colorPicker';
 
 import updateBag from './Api';
+import Header from './Header';
 
 
 
@@ -189,7 +190,7 @@ const FormUI = () => {
    
     return (
        <>
-         
+         < Header/>
         <form  class="form" onSubmit={handleSubmit}>
             
             <div id="hero-image">

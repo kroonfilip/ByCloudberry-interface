@@ -1,4 +1,5 @@
-import  {React, useEffect, useRef, useState } from 'react';
+import  {React, useEffect, useState } from 'react';
+import Header from './Header';
 
 function Home () {
   const [APIStatus, setAPIStatus] = useState("");
@@ -9,7 +10,8 @@ function Home () {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        authorization: 'Bearer rnd_z1Elxzzz9UC4N6I3IqY8SXo2Jyqd'
+        authorization: 'Bearer ' + process.env.RENDER_API_KEY,
+
       }
     };
     
@@ -23,7 +25,7 @@ function Home () {
         method: 'POST',
         headers: {
           accept: 'application/json',
-          authorization: 'Bearer rnd_z1Elxzzz9UC4N6I3IqY8SXo2Jyqd'
+          authorization: 'Bearer ' + process.env.RENDER_API_KEY,
         }
       };
       
@@ -40,7 +42,7 @@ function Home () {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          authorization: 'Bearer rnd_z1Elxzzz9UC4N6I3IqY8SXo2Jyqd'
+          authorization: 'Bearer ' + process.env.RENDER_API_KEY,
         }
       };  
       fetch('https://proxy.cors.sh/https://api.render.com/v1/services/srv-cd6gm4pgp3jlirg6l85g', options)
@@ -51,17 +53,8 @@ function Home () {
     }, []);
         
     function renderButton(){
-      console.log(APIStatus + " APISTATUS");
-      // if (APIStatus == "not_suspended") {
-      //   console.log(APIStatus);
-      //   return <button className='suspButton' onClick={handleServer}>Suspend Server</button>
-      // }
-      // else {
-      //   return <button className='resButton' onClick={handleServer}>Resume Server</button>
-      // }
-      //create a checkbox slider that is checked if the server is not suspended
-      //if the server is suspended, the slider is unchecked
-      //if the slider is checked, the server is resumed
+      console.log("APISTATUS: " + APIStatus);
+      
       return (
         //if APIStatus is not_suspended, the slider is checked
       <label className="switch">
@@ -81,6 +74,10 @@ function Home () {
     }
 
   return (
+    <>
+    < Header/>
+
+
     <div className='apiStatus'>
        {renderStatusText()}
      
@@ -88,6 +85,7 @@ function Home () {
 
 
     </div>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import FormUI from './FormUI';
@@ -8,10 +8,23 @@ import LogIn from './LogIn';
 
 
 const App = () => {
+
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem('isLoggedIn') === 'true' ? true : false
+  );
+
+  if (!loggedIn) {
+    return (
+      <BrowserRouter>
+        <LogIn setLoggedIn={setLoggedIn} />
+      </BrowserRouter>
+    );
+  }
+
   return (
     <>
     < BrowserRouter>
-      < Header />
+      
         < Routes>
           < Route path="/" element={< Home />} />
           < Route path="/form" element={< FormUI />} />

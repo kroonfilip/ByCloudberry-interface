@@ -1,4 +1,4 @@
-import { NavLink, useLocation, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import "./style.css";
 
 function Header () {
@@ -20,7 +20,8 @@ function Header () {
           </li>
           <li>
             <NavLink to='/login'>
-              LOG IN
+              LOG OUT
+              
             </NavLink>
           </li>
         </ul>
