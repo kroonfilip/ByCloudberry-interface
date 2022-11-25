@@ -10,8 +10,7 @@ function Home () {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        authorization: 'Bearer ' + process.env.RENDER_API_KEY,
-
+        authorization: 'Bearer *NYCKEL HÄR*'
       }
     };
     
@@ -25,7 +24,7 @@ function Home () {
         method: 'POST',
         headers: {
           accept: 'application/json',
-          authorization: 'Bearer ' + process.env.RENDER_API_KEY,
+          authorization: 'Bearer *NYCKEL HÄR*'
         }
       };
       
@@ -42,7 +41,7 @@ function Home () {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          authorization: 'Bearer ' + process.env.RENDER_API_KEY,
+          authorization: 'Bearer *NYCKEL HÄR*'
         }
       };  
       fetch('https://proxy.cors.sh/https://api.render.com/v1/services/srv-cd6gm4pgp3jlirg6l85g', options)
@@ -53,8 +52,17 @@ function Home () {
     }, []);
         
     function renderButton(){
-      console.log("APISTATUS: " + APIStatus);
-      
+      console.log(APIStatus + " APISTATUS");
+      // if (APIStatus == "not_suspended") {
+      //   console.log(APIStatus);
+      //   return <button className='suspButton' onClick={handleServer}>Suspend Server</button>
+      // }
+      // else {
+      //   return <button className='resButton' onClick={handleServer}>Resume Server</button>
+      // }
+      //create a checkbox slider that is checked if the server is not suspended
+      //if the server is suspended, the slider is unchecked
+      //if the slider is checked, the server is resumed
       return (
         //if APIStatus is not_suspended, the slider is checked
       <label className="switch">
