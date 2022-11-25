@@ -5,6 +5,7 @@ import axios from "axios";
 import ColorPicker from './colorPicker';
 
 import updateBag from './Api';
+import Header from './Header';
 
 
 
@@ -50,12 +51,9 @@ const FormUI = () => {
         const resp = await axios.get("https://bycloudberry-server.onrender.com/getbagnames", {
          
         });
-        console.log(resp)
         setDataName(resp)
         return resp
     }
-    console.log(data)
-    console.log(dataName)
     useEffect(() => {
         const inputLeather = inputRef.current[0];
         const inputProduction = inputRef.current[1];
@@ -73,21 +71,7 @@ const FormUI = () => {
         const colorPackaging = colorRef.current[5];
         const colorDetails = colorRef.current[6];
 
-        console.log(inputLeather); // 👈️ element here
-        console.log(inputProduction)
-        console.log(inputLogistics)
-        console.log(inputRecycling)
-        console.log(inputLining)
-        console.log(inputPackaging)
-        console.log(inputDetails)
-        
-        console.log(colorLeather)
-        console.log(colorProduction)
-        console.log(colorLogistics)
-        console.log(colorRecycling)
-        console.log(colorLining)
-        console.log(colorPackaging)
-        console.log(colorDetails)
+       
       }, []);
 
     const handleSubmit = (e) => {
@@ -102,7 +86,7 @@ const FormUI = () => {
             { type: "Details", amount: parseInt(inputRef.current[6].value), color: colorRef.current[6].value },
             
           ]}).then((res) => {
-            console.log(res);
+           
           });
         }
         
@@ -157,8 +141,7 @@ const FormUI = () => {
         
     }
   
-    console.log(inputRef.current)
-    console.log(colorRef.current)
+
     
 
 
@@ -181,7 +164,7 @@ const FormUI = () => {
 
     }
    
-    console.log(comparisonInput)
+
     
     // useEffect(() => {
     //     storeBags()
@@ -207,8 +190,7 @@ const FormUI = () => {
         var renderData = dataName ? dataName.data.map((item) => {
         const all_products = item.name
         const type = item.type
-
-        console.log(all_products)      
+     
         
         return (
             <option  value= {[all_products, type]}> {all_products} {type}</option>
@@ -222,7 +204,7 @@ const FormUI = () => {
    
     return (
        <>
-         
+         < Header/>
         <form  class="form" onSubmit={handleSubmit}>
             
             <div id="hero-image">
