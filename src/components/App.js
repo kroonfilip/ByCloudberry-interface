@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import FormUI from './FormUI';
 import Home from './Home';
-import Header from './Header';
 import LogIn from './LogIn';
+import Settings from './settings';
 
 
 const App = () => {
@@ -28,6 +28,7 @@ const App = () => {
         < Routes>
           < Route path="/" element={< Home />} />
           < Route path="/form" element={< FormUI />} />
+          < Route path="/settings" element={< Settings />} />
           < Route path="/login" element={< LogIn />} />
         </Routes>
     

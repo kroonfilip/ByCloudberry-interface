@@ -137,7 +137,7 @@ li {
   font-size: large;
 }
 
-nav {
+nav, .dropdown {
  color: white;
   text-decoration: none;
   display: inline-block;
@@ -280,6 +280,10 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(40px);
+}
+
+.dropList {
+  color: red;
 }
 
 
