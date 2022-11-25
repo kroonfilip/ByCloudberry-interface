@@ -118,6 +118,8 @@ input{
   margin: 0;
   column-gap: 0;
   column-gap: normal;
+  
+  
 }
 .colorPicker{
   width: 100%;
@@ -125,4 +127,14 @@ input{
   padding: 0;
   margin-top: 50px;
 }
+
+@media screen and (max-width: 500px) {
+  #dropdown{
+    width: 75%;
+  }
+}
+
+
+
+
  

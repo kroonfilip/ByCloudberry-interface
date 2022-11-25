@@ -26,6 +26,7 @@ const FormUI = () => {
     
     useEffect(() => {
         fetchDatabyName()
+        
 
     }, [])
 
@@ -107,8 +108,20 @@ const FormUI = () => {
         
     const handleChange = () => {
         setData(data)
+        
+        
+
 
     }
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(true);
+    }
+    
+
+    
+    
 
     function renderData() {
             var renderData = data ? data.data.graphdata.map((item, index) => {
@@ -138,7 +151,7 @@ const FormUI = () => {
 
                 )
 
-            }): "TOM DATA";
+            }): "";
 
         return renderData;
         
@@ -154,7 +167,8 @@ const FormUI = () => {
         var comparisonData = data ? data.data.comparisonData:""
 
         return (
-            <div className='field'>
+            <div style={{display: isActive ? 'block': 'none'}}className= "compfield">
+            
             <label>
                 Comparison Data
                 <br></br>
@@ -219,17 +233,17 @@ const FormUI = () => {
              </div>
                 
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
-                    <select id="test"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); setCurrentBag(e.target.value); handleChange(); fetchData(e.target.value);  }} >
-                    <option value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
+                    <select id="dropdown"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); setCurrentBag(e.target.value); handleChange(); fetchData(e.target.value);toggleClass(e.target.value) }} >
+                    <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     
                     </select>
-                    {console.log(productValue)}
-                    <h1>{productValue}</h1>
+                    
+                    <h1></h1>
                     
             {renderData()}
             {ComparisonData()}
-            <button id="save-button" value='submit'>Save Changes</button>
+            <button style={{display: isActive ? 'inline-block': 'none'}}id="save-button" value='submit'>Save Changes</button>
             <div className='colorPicker'>
             <ColorPicker></ColorPicker>
             </div>
