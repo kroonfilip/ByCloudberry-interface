@@ -78,7 +78,7 @@ const routeToForm = () => {
         <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
         {drpdown()}
         {Object.keys(newDataName).map((c) => {
-          return <option>{newDataName[c]}</option>;
+          return <option>{newDataName[c].toLowerCase()}</option>;
         })}
         
         
@@ -93,7 +93,7 @@ const routeToForm = () => {
 
         {Array.from(Array(counter)).map((c, index) => {
           return (
-            <input
+            <input id='addProduct'
               onChange={handleOnChange}
               key={c}
               onKeyPress={handleInput}

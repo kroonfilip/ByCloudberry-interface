@@ -80,6 +80,9 @@ select {
   display: block;
   color: white;
 }
+#addProduct{
+  width: 23%;
+}
 #dropdown{
   position: absolute;
   top: 50%;
