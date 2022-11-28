@@ -144,7 +144,7 @@ const FormUI = () => {
 
     
 
-
+    
     function ComparisonData() {
         
         var comparisonData = data ? data.data.comparisonData:""
@@ -184,7 +184,7 @@ const FormUI = () => {
         setBag(bag);
         
     }
-     
+    
    function drpdown() {
 
         var renderData = dataName ? dataName.data.map((item) => {

@@ -53,6 +53,7 @@ select {
   /* Set a specific height */
   padding-top:190px;
   padding-bottom:190px;
+  height: 50vh;
 
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
@@ -61,8 +62,32 @@ select {
   position: relative;
 }
 
-
-  
+#add{
+ 
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: block;
+}
+#add > h3{
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: block;
+  color: white;
+}
+#dropdown{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: block;
+}
   .picker {
     position: relative;
     padding-left: 30px;
