@@ -2,11 +2,13 @@ import  {React, useEffect, useState } from 'react';
 import Header from './Header';
 import "./style.css";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom';
 
 function Home () {
   const [dataName, setDataName] = useState("");
   const [productValue, setValue] = useState("");
   const [newDataName, setNewDataName] = useState("");
+  const navigate = useNavigate()
   useEffect(() => {
     fetchDatabyName()
   
@@ -51,7 +53,7 @@ const handleOnChange = (e) => {
   
 
 const handleInput= (e) => {
-  if(e.key == 'Enter'){
+  if(e.key === 'Enter'){
     setNewDataName(inputValues)
     console.log(inputValues)
 
@@ -63,12 +65,16 @@ const [isActive, setActive] = useState(false);
         setActive(true);
     }
 
+const routeToForm = () => {
+  navigate("/form")
+}
+
   return (
     <>
     < Header/>
     <div id="hero-image">
       <h3 id="header-products" style={{ fontSize: "20px" }}></h3>
-        <select id="dropdown"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); }} >
+        <select id="dropdown"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); routeToForm() }} >
         <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
         {drpdown()}
         {Object.keys(newDataName).map((c) => {

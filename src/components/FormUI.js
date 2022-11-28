@@ -9,6 +9,7 @@ import Header from './Header';
 
 
 
+
 const FormUI = () => {
     
     const url = "https://bycloudberry-server.onrender.com/getbag";
@@ -16,7 +17,6 @@ const FormUI = () => {
     const [data, setData] = useState("");
     const [dataName, setDataName] = useState("");
     const [productValue, setValue] = useState("");
-    const [productChosen, setChosen] = useState("");
     const [bag, setBag] = useState();
     
 
