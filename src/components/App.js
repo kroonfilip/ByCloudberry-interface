@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { store } from '../context/store';
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Provider, useDispatch } from 'react-redux';
 import FormUI from './FormUI';
 import Home from './Home';
 import LogIn from './LogIn';
@@ -23,6 +25,7 @@ const App = () => {
 
   return (
     <>
+    <Provider store={store}>
     < BrowserRouter>
       
         < Routes>
@@ -33,6 +36,7 @@ const App = () => {
         </Routes>
     
     </BrowserRouter>
+    </Provider>
    </>
   );
 };

@@ -7,6 +7,9 @@ import ColorPicker from './colorPicker';
 import updateBag from './Api';
 import Header from './Header';
 
+import { useAppDispatch, useAppSelector } from '../context/hooks';
+import { setBagState } from '../context/bagSlice';
+
 
 
 const FormUI = () => {
@@ -18,9 +21,12 @@ const FormUI = () => {
     const [productValue, setValue] = useState("");
     const [productChosen, setChosen] = useState("");
     const [bag, setBag] = useState();
+    const [newBag, setNewBag] = useState("");
+
+    const bagState = useAppSelector((state) => state.bag);
+    const dispatch = useAppDispatch();
+
     
-
-
     const inputRef = useRef([]);
     const colorRef = useRef([]);
     const comparisonInput = useRef([]);
@@ -30,6 +36,7 @@ const FormUI = () => {
 
     }, [])
 
+    
     const fetchData = async(value) => {
         //value has the format of "disa,handbag"
         //we need to split it into two variables, name and type
@@ -40,9 +47,9 @@ const FormUI = () => {
             type: type,
           },
           
-        });
+        })
         setData(resp)
-        
+        dispatch(setBagState(resp.data));
         return resp
     }
     
@@ -170,7 +177,7 @@ const FormUI = () => {
         setBag(bag);
         
     }
-     
+  
    function drpdown() {
 
         var renderData = dataName ? dataName.data.map((item) => {
@@ -201,7 +208,7 @@ const FormUI = () => {
              </div>
                 
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
-                    <select id="test"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); setCurrentBag(e.target.value); handleChange(); fetchData(e.target.value);  }} >
+                    <select id="test"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); setCurrentBag(e.target.value); handleChange(); fetchData(e.target.value); }} >
                     <option value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     
