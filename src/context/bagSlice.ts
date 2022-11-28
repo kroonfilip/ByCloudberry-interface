@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export type Bag = {
     bagtype: string;
@@ -11,6 +11,14 @@ export type Bag = {
     }];
     name: string;
     _id: string;
+
+    transparencyData: [{
+        /* EXEMPEL PÅ OBJEKT */
+        value1: number;
+        value2: number;
+        value3: number;
+        value4: number;
+    }]
 };
 
 const initialState: Bag = {
@@ -24,6 +32,13 @@ const initialState: Bag = {
     }],
     name: "",
     _id: "",
+
+    transparencyData: [{
+        value1: 0,
+        value2: 0,
+        value3: 0,
+        value4: 0,
+    }]
 };
 
 
@@ -33,18 +48,26 @@ export const bagSlice = createSlice({
     reducers: {
         
         setBagState: (state, action) => {
-            console.log("yoyo");
             Object.assign(state, action.payload);
+            state.bagtype = action.payload.bagtype;
+            state.color = action.payload.color;
+            state.comparisonData = action.payload.comparisonData;
+            state.graphdata = action.payload.graphdata;
+            state.name = action.payload.name;
+            state._id = action.payload._id;
 
-            
-
-            state = action.payload;
-
-            console.log(state)
+        },
+        editGraphData: (state, action) => {
+            state.graphdata = action.payload;
+        },
+        editTransparencyData: (state, action) => {
+            state.transparencyData = action.payload;
         },
     },
 });
 
 export const { setBagState } = bagSlice.actions;
+export const { editGraphData } = bagSlice.actions;
+export const { editTransparencyData } = bagSlice.actions;
 
 export default bagSlice.reducer;
