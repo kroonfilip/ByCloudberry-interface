@@ -117,7 +117,7 @@ const FormUI = () => {
                     <label key={index}>
                      {item.type} (kg CO2E) 
                      <br></br>
-                    <input type="number" step="0.001" min="0.001"  placeholder = {item.amount} ref={(ref) => (inputRef.current[index] = ref)} value={item.value}>
+                    <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} defaultValue={item.amount}>
                     </input>
                     
                     </label>
@@ -126,7 +126,7 @@ const FormUI = () => {
                     <label key={index}>
                     {item.type} (Hex color)
                     <br></br>
-                    <input placeholder = {item.color} ref={(ref) => (colorRef.current[index] = ref)} value={item.value}></input>
+                    <input  ref={(ref) => (colorRef.current[index] = ref)} defaultValue={item.color}></input>
                     </label>
                    
                     </div>
@@ -155,7 +155,7 @@ const FormUI = () => {
             <label>
                 Comparison Data
                 <br></br>
-               <input type="number" step="0.001" min="0.001" ref={comparisonInput} placeholder= {comparisonData}>        
+               <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={comparisonData}>        
                </input>
             </label>
             </div>
