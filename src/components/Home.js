@@ -69,6 +69,7 @@ const routeToForm = () => {
   navigate("/form")
 }
 
+
   return (
     <>
     < Header/>
@@ -99,6 +100,8 @@ const routeToForm = () => {
               onKeyPress={handleInput}
               className={index}
               type="text"
+              maxLength={25}
+              placeholder="Maximum characters is 25"
             ></input>
           );
         })}
