@@ -45,21 +45,40 @@ select {
   
 }
 
+#back-button {
+  display: block;
+  background-color: #555555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 35px;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  
+ 
+
+
+
+}
+
 
 #hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://i.pinimg.com/originals/25/09/2a/25092adf72f3feb759bbd871948cd6b4.jpg");
 
   /* Set a specific height */
-  padding-top:190px;
-  padding-bottom:190px;
-  height: 50vh;
+ 
+  height: 100vh;
 
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  
 }
 
 #add{

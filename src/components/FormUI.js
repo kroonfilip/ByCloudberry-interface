@@ -6,12 +6,13 @@ import ColorPicker from './colorPicker';
 
 import updateBag from './Api';
 import Header from './Header';
+import {useNavigate} from 'react-router-dom';
 
 
 
 
 const FormUI = () => {
-    
+    const navigate = useNavigate()
     const url = "https://bycloudberry-server.onrender.com/getbag";
     const postURL = "https://bycloudberry-server.onrender.com/insertbag"
     const [data, setData] = useState("");
@@ -107,6 +108,7 @@ const FormUI = () => {
     
     
 
+
     function renderData() {
             var renderData = data ? data.data.graphdata.map((item, index) => {
         
@@ -126,7 +128,7 @@ const FormUI = () => {
                     <label key={index}>
                     {item.type} (Hex color)
                     <br></br>
-                    <input  ref={(ref) => (colorRef.current[index] = ref)} defaultValue={item.color}></input>
+                    <input onChange={checkHexValues} ref={(ref) => (colorRef.current[index] = ref)} defaultValue={item.color}></input>
                     </label>
                    
                     </div>
@@ -140,8 +142,31 @@ const FormUI = () => {
         return renderData;
         
     }
+
+    function checkHexValues () {
+        let hexValue = "/^3\d{9}$/";
+
+        if (colorRef.match(hexValue)) {
+            alert("Success!")
+
+            return true;    
+
+        }
+
+        else {
+            alert("Failed!")
+
+            return false; 
+
+        }
+
+
+
+    }
   
 
+   
+   
     
 
     
@@ -201,6 +226,10 @@ const FormUI = () => {
    return renderData;
    
    }
+
+   const routeToHome = () => {
+    navigate("/")
+  }
    
     return (
        <>
@@ -225,7 +254,8 @@ const FormUI = () => {
                     
             {renderData()}
             {ComparisonData()}
-            <button style={{display: isActive ? 'inline-block': 'none'}}id="save-button" value='submit'>Save Changes</button>
+            <button onClick={routeToHome} style={{display: isActive ? 'inline-block': 'none'}}id="back-button">Back</button>
+            <button style={{display: isActive ? 'inline-block': 'none'}}id="save-button" value='submit'>Save and Continue</button>
             <div className='colorPicker'>
             <ColorPicker></ColorPicker>
             </div>
@@ -235,4 +265,5 @@ const FormUI = () => {
             </>
     )
 }
+
 export default FormUI;
