@@ -8,6 +8,7 @@ function Home () {
   const [dataName, setDataName] = useState("");
   const [productValue, setValue] = useState("");
   const [newDataName, setNewDataName] = useState("");
+  const [typeValue, setTypeValue] = useState("");
   const navigate = useNavigate()
   useEffect(() => {
     fetchDatabyName()
@@ -55,7 +56,7 @@ const handleOnChange = (e) => {
 const handleInput= (e) => {
   if(e.key === 'Enter'){
     setNewDataName(inputValues)
-    console.log(inputValues)
+    
 
   }
 }
@@ -79,8 +80,10 @@ const routeToForm = () => {
         <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
         {drpdown()}
         {Object.keys(newDataName).map((c) => {
-          return <option>{newDataName[c].toLowerCase()}</option>;
+          return <option value={[newDataName, typeValue]}>{newDataName[c].toLowerCase()} {typeValue}</option>;
         })}
+       
+        
         
         
         
@@ -91,7 +94,15 @@ const routeToForm = () => {
         <button style={{display: isActive ? 'none': 'inline-block'}} onClick={(e) => {handle(); toggleClass()}}>Add product</button>
         <h3 style={{display: isActive? 'inline-block': 'none'}}>Submit new product by pressing enter</h3>
 
-
+        <select value ={typeValue} onChange ={e=> {setTypeValue(e.target.value);}}style={{display: isActive? 'inline-block': 'none'}} >
+        <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a type</option>
+          <option>Handbags</option>
+          <option>Crossbodies</option>
+          <option>Clutches</option>
+          <option>Laptop bags</option>
+          <option>Laptop covers</option>
+          <option>Wallets</option>
+        </select>
         {Array.from(Array(counter)).map((c, index) => {
           return (
             <input id='addProduct'
@@ -105,6 +116,7 @@ const routeToForm = () => {
             ></input>
           );
         })}
+       
         </div>
     </div>
     </>
