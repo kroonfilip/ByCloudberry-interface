@@ -119,7 +119,7 @@ const FormUI = () => {
                     <label key={index}>
                      {item.type} (kg CO2E) 
                      <br></br>
-                    <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} defaultValue={item.amount}>
+                    <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount}>
                     </input>
                     
                     </label>
@@ -128,7 +128,7 @@ const FormUI = () => {
                     <label key={index}>
                     {item.type} (Hex color)
                     <br></br>
-                    <input onChange={checkHexValues} ref={(ref) => (colorRef.current[index] = ref)} defaultValue={item.color}></input>
+                    <input onChange={checkHexValues} ref={(ref) => (colorRef.current[index] = ref)} key={item.color} defaultValue={item.color}placeholder={item.color}></input>
                     </label>
                    
                     </div>
