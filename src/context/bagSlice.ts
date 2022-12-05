@@ -4,11 +4,15 @@ export type Bag = {
     bagtype: string;
     color: string;
     comparisonData: number;
-    graphdata: [{
-        amount: number;
-        color: string;
-        type: string;
-    }];
+    graphdata: [
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+    ];
     name: string;
     _id: string;
 
@@ -25,11 +29,15 @@ const initialState: Bag = {
     bagtype: "",
     color: "",
     comparisonData: 0,
-    graphdata: [{
-        amount: 0,
-        color: "",
-        type: "",
-    }],
+    graphdata: [
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+    ],
     name: "",
     _id: "",
 
@@ -52,9 +60,9 @@ export const bagSlice = createSlice({
             state.bagtype = action.payload.bagtype;
             state.color = action.payload.color;
             state.comparisonData = action.payload.comparisonData;
-            state.graphdata = action.payload.graphdata;
             state.name = action.payload.name;
             state._id = action.payload._id;
+            console.log(state.name)
 
         },
         editGraphData: (state, action) => {

@@ -4,7 +4,7 @@ import "./style.css";
 import axios from "axios";
 import ColorPicker from './colorPicker';
 
-import updateBag from './Api';
+import api from './Api';
 import Header from './Header';
 import {useNavigate} from 'react-router-dom';
 
@@ -84,7 +84,7 @@ const FormUI = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        updateBag({name : bag.name, bagtype: bag.type, graphdata: [
+        api.updateBag({name : bag.name, bagtype: bag.type, graphdata: [
             { type: "Leather", amount: parseInt(inputRef.current[0].value), color: colorRef.current[0].value},
             { type: "Production", amount: parseInt(inputRef.current[1].value), color: colorRef.current[1].value },
             { type: "Logistics", amount: parseInt(inputRef.current[2].value), color: colorRef.current[2].value },
@@ -117,7 +117,7 @@ const FormUI = () => {
 
 
     function renderData() {
-            var renderData = data ? data.data.graphdata.map((item, index) => {
+            var renderData = bagState ? bagState.graphdata.map((item, index) => {
         
                 return (
                     
@@ -179,10 +179,10 @@ const FormUI = () => {
     
     function ComparisonData() {
         
-        var comparisonData = data ? data.data.comparisonData:""
+        var comparisonData = bagState? bagState.comparisonData:""
 
         return (
-            <div style={{display: isActive ? 'block': 'none'}}className= "compfield">
+            <div style={{display: isActive ? 'none': 'block'}}className= "compfield">
             
             <label>
                 Comparison Data
@@ -252,18 +252,18 @@ const FormUI = () => {
                 
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
                 
-                    <select id="dropdown"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); setCurrentBag(e.target.value); handleChange(); fetchData(e.target.value);toggleClass(e.target.value) }} >
+                    <select id="dropdown"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {fetchData(e.target.value);setValue(e.target.value); setCurrentBag(e.target.value); handleChange();toggleClass(e.target.value) }} >
                     <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     
                     </select>
-                    
+                    <h1>{bagState.name}</h1>
                     
                     
             {renderData()}
             {ComparisonData()}
-            <button onClick={routeToHome} style={{display: isActive ? 'inline-block': 'none'}}id="back-button">Back</button>
-            <button style={{display: isActive ? 'inline-block': 'none'}}id="save-button" value='submit'>Save and Continue</button>
+            <button onClick={routeToHome} style={{display: isActive ? 'none': 'inline-block'}}id="back-button">Back</button>
+            <button style={{display: isActive ? 'none': 'inline-block'}}id="save-button" value='submit'>Save and Continue</button>
             <div className='colorPicker'>
             <ColorPicker></ColorPicker>
             </div>
