@@ -9,6 +9,9 @@ import Header from './Header';
 import {useNavigate} from 'react-router-dom';
 
 
+import { useAppDispatch, useAppSelector } from '../context/hooks';
+import { setBagState } from '../context/bagSlice';
+
 
 
 const FormUI = () => {
@@ -19,9 +22,12 @@ const FormUI = () => {
     const [dataName, setDataName] = useState("");
     const [productValue, setValue] = useState("");
     const [bag, setBag] = useState();
+    const [newBag, setNewBag] = useState("");
+
+    const bagState = useAppSelector((state) => state.bag);
+    const dispatch = useAppDispatch();
+
     
-
-
     const inputRef = useRef([]);
     const colorRef = useRef([]);
     const comparisonInput = useRef([]);
@@ -32,6 +38,7 @@ const FormUI = () => {
 
     }, [])
 
+    
     const fetchData = async(value) => {
         //value has the format of "disa,handbag"
         //we need to split it into two variables, name and type
@@ -42,9 +49,9 @@ const FormUI = () => {
             type: type,
           },
           
-        });
+        })
         setData(resp)
-        
+        dispatch(setBagState(resp.data));
         return resp
     }
     
