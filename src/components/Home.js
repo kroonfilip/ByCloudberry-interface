@@ -96,12 +96,12 @@ const routeToForm = () => {
 
         <select value ={typeValue} onChange ={e=> {setTypeValue(e.target.value);}}style={{display: isActive? 'inline-block': 'none'}} >
         <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a type</option>
-          <option>Handbags</option>
-          <option>Crossbodies</option>
-          <option>Clutches</option>
-          <option>Laptop bags</option>
-          <option>Laptop covers</option>
-          <option>Wallets</option>
+          <option>handbags</option>
+          <option>crossbodies</option>
+          <option>clutches</option>
+          <option>laptop bags</option>
+          <option>laptop covers</option>
+          <option>wallets</option>
         </select>
         {Array.from(Array(counter)).map((c, index) => {
           return (

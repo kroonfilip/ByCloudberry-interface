@@ -119,7 +119,7 @@ const FormUI = () => {
                     <label key={index}>
                      {item.type} (kg CO2E) 
                      <br></br>
-                    <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount}>
+                    <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount} value={item.value}>
                     </input>
                     
                     </label>
@@ -128,7 +128,7 @@ const FormUI = () => {
                     <label key={index}>
                     {item.type} (Hex color)
                     <br></br>
-                    <input onChange={checkHexValues} ref={(ref) => (colorRef.current[index] = ref)} key={item.color} defaultValue={item.color}placeholder={item.color}></input>
+                    <input ref={(ref) => (colorRef.current[index] = ref)} key={item.color} defaultValue={item.color}placeholder={item.color} value={item.value}></input>
                     </label>
                    
                     </div>
@@ -142,7 +142,7 @@ const FormUI = () => {
         return renderData;
         
     }
-
+/*
     function checkHexValues () {
         let hexValue = "/^3\d{9}$/";
 
@@ -165,7 +165,7 @@ const FormUI = () => {
     }
   
 
-   
+   */
    
     
 
@@ -244,13 +244,14 @@ const FormUI = () => {
              </div>
                 
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
+                
                     <select id="dropdown"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {setValue(e.target.value); setCurrentBag(e.target.value); handleChange(); fetchData(e.target.value);toggleClass(e.target.value) }} >
                     <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     
                     </select>
                     
-                    <h1></h1>
+                    
                     
             {renderData()}
             {ComparisonData()}
