@@ -7,6 +7,7 @@ import FormUI from './FormUI';
 import Home from './Home';
 import LogIn from './LogIn';
 import Settings from './settings';
+import Transparency from './TransparencyGraph';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
         < Routes>
           < Route path="/" element={< Home />} />
           < Route path="/form" element={< FormUI />} />
+          < Route path="/transparency" element={< Transparency />} />
           < Route path="/settings" element={< Settings />} />
           < Route path="/login" element={< LogIn />} />
         </Routes>

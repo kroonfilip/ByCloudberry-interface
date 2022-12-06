@@ -61,6 +61,7 @@ const fetchData = async(value) => {
     
   })
   setData(resp)
+  console.log(resp)
   dispatch(setBagState(resp.data));
   return resp
 }

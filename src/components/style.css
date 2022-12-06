@@ -264,6 +264,10 @@ a:visited {
   transition: 0.5s;
 }
 
+.bagNameTitle{
+  margin-top: 50px;
+}
+
 .login {
   
   position: absolute;
