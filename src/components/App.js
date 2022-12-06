@@ -7,6 +7,7 @@ import FormUI from './FormUI';
 import Home from './Home';
 import LogIn from './LogIn';
 import Settings from './settings';
+import TransparencyGraph from './TransparencyGraph';
 
 
 const App = () => {
@@ -15,13 +16,13 @@ const App = () => {
     localStorage.getItem('isLoggedIn') === 'true' ? true : false
   );
 
-  if (!loggedIn) {
+  /* if (!loggedIn) {
     return (
       <BrowserRouter>
         <LogIn setLoggedIn={setLoggedIn} />
       </BrowserRouter>
     );
-  }
+  }  */
 
   return (
     <>
@@ -32,6 +33,7 @@ const App = () => {
           < Route path="/" element={< Home />} />
           < Route path="/form" element={< FormUI />} />
           < Route path="/settings" element={< Settings />} />
+          < Route path="/transparency" element={< TransparencyGraph />} />
           < Route path="/login" element={< LogIn />} />
         </Routes>
     
