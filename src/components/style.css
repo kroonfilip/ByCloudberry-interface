@@ -10,7 +10,11 @@ body {
   }
 
 #header {
-  
+  position: absolute;
+  top:30%;
+  bottom:40%;
+  left:20%;
+  right:20%;
   color: white;
 
 }  
@@ -350,5 +354,13 @@ input:checked + .slider:before {
   color: red;
 }
 
-
+@media screen and (max-width: 495px) {
+  #header {
+    position: absolute;
+    top:18%;
+  
+    color: white;
+  
+  } 
+}
  

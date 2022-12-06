@@ -224,7 +224,7 @@ const TransparencyGraph = () => {
             
                 <div id="hero-image">
                     <div id="hero-text">
-                    <h1 id="header" style={{ fontSize: "40px" }}>TRANSPARANCY DATA FORM</h1>
+                    <h1 style={{color:'white', fontSize: "40px", position:'relative', top:300}}>TRANSPARANCY DATA FORM</h1>
                         
                     </div>
                 </div>
