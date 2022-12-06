@@ -44,16 +44,18 @@ const TransparencyGraph = () => {
                 {/* <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                     Hover over me
                 </div> */}
-                {isHovering && (
-                    <div>
-                        <h2>Only visible when hovering div</h2>
-                    </div>
-                )}
                 <label>
                     Bottom Color (Hex value) <img id='i' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} src='https://upload.wikimedia.org/wikipedia/commons/e/e4/Infobox_info_icon.svg' alt='img' width={15} height={15}></img>
                     <br></br>
+                    {isHovering && (
+                    <div>
+                        <img id='i' src='https://upload.wikimedia.org/wikipedia/commons/e/e4/Infobox_info_icon.svg' alt='img' width={15} height={15}></img>
+                        {/* <h2>Only visible when hovering div</h2> */}
+                    </div>
+                )}
                     <input placeholder = {transparencydata.bottomColor} ></input>
                 </label>
+                
             </div>
             <div >
                 <label>
