@@ -7,6 +7,7 @@ import ColorPicker from './colorPicker';
 import updateBag from './Api';
 import Header from './Header';
 import transparancyBackground from './transparencyBackground.png';
+import Image from '../Image/240px-Infobox_info_icon.png'
 
 const TransparencyGraph = () => {
     const url = "https://bycloudberry-server.onrender.com/getbag";
@@ -44,8 +45,13 @@ const TransparencyGraph = () => {
                 {/* <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
                     Hover over me
                 </div> */}
+                {isHovering && (
+                    <div>
+                        <h2>Only visible when hovering div</h2>
+                    </div>
+                )}
                 <label>
-                    Bottom Color (Hex value) <img id='i' onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} src='https://upload.wikimedia.org/wikipedia/commons/e/e4/Infobox_info_icon.svg' alt='img' width={15} height={15}></img>
+                    Bottom Color (Hex value) <img onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} src={Image} width={15} height={15}></img>
                     <br></br>
                     {isHovering && (
                     <div>
@@ -55,7 +61,6 @@ const TransparencyGraph = () => {
                 )}
                     <input placeholder = {transparencydata.bottomColor} ></input>
                 </label>
-                
             </div>
             <div >
                 <label>
