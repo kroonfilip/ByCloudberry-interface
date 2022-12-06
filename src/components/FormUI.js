@@ -123,7 +123,7 @@ const FormUI = () => {
                     
                    <>
                     <div className='field'>
-                    <label key={index}>
+                    <label key={index} >
                      {item.type} (kg CO2E) 
                      <br></br>
                     <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount} value={item.value}>
