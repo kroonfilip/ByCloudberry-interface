@@ -9,8 +9,14 @@ import Header from './Header';
 import {useNavigate} from 'react-router-dom';
 
 
+
 import { useAppDispatch, useAppSelector } from '../context/hooks';
 import { setBagState } from '../context/bagSlice';
+import iIcon from '../Image/240px-Infobox_info_icon.png'
+import piechart1Background from '../Image/piechart1Background.png'
+import piechart3Background from '../Image/piechart3Background.png'
+
+
 
 
 
@@ -31,12 +37,32 @@ const FormUI = () => {
     const inputRef = useRef([]);
     const colorRef = useRef([]);
     const comparisonInput = useRef([]);
+    const [isHoveringFirstGraph, setIsHoveringFirstGraph] = useState(false);
+    const [isHoveringSecondGraph, setIsHoveringSecondGraph] = useState(false);
+
     
     useEffect(() => {
         fetchDatabyName()
         
 
     }, [])
+
+
+    const handleMouseOverFirst = () => {
+        setIsHoveringFirstGraph(true);
+    };
+  
+    const handleMouseOutFirst = () => {
+        setIsHoveringFirstGraph(false);
+    };
+
+    const handleMouseOverSecond = () => {
+        setIsHoveringSecondGraph(true);
+    };
+  
+    const handleMouseOutSecond = () => {
+        setIsHoveringSecondGraph(false);
+    };
 
     
     const fetchData = async(value) => {
@@ -186,6 +212,15 @@ const FormUI = () => {
             
             <label>
                 Comparison Data
+                <img onMouseOver={handleMouseOverSecond} onMouseOut={handleMouseOutSecond} src={iIcon} width={15} height={15}></img>
+                   
+                   <br></br>
+                       {isHoveringSecondGraph && (
+                           <div>
+                               <img id='b' src={piechart3Background} alt='img' width={470} height={350}></img>
+                           
+                           </div>
+                       )}         
                 <br></br>
                <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={comparisonData}>        
                </input>
@@ -257,7 +292,17 @@ const FormUI = () => {
                     {drpdown()}
                     
                     </select>
-                    <h1>{bagState.name}</h1>
+                    <h1>{bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
+                   
+                    <br></br>
+                        {isHoveringFirstGraph && (
+                            <div>
+                                <img id='b' src={piechart1Background} alt='img' width={250} height={200}></img>
+                            
+                            </div>
+                        )}    
+
+
                     
                     
             {renderData()}
