@@ -1,28 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-import api from "../components/Api";
 
 export type Bag = {
     bagtype: string;
     color: string;
     comparisonData: number;
     graphdata: [
-        { type: string; color: string; amount: number },
-        { type: string; color: string; amount: number },
-        { type: string; color: string; amount: number },
-        { type: string; color: string; amount: number },
-        { type: string; color: string; amount: number },
-        { type: string; color: string; amount: number },
-        { type: string; color: string; amount: number },
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
+        {amount: number;color: string;type: string;},
     ];
     name: string;
     _id: string;
 
-    bottomColor: string;
-    topColor: string;
-    onlineSEK: number;
-    onlineEUR: number;
-    retailSEK: number;
-    retailEUR: number;
+    transparencyData: [{
+        /* EXEMPEL PÅ OBJEKT */
+        value1: number;
+        value2: number;
+        value3: number;
+        value4: number;
+    }]
 };
 
 const initialState: Bag = {
@@ -30,23 +30,23 @@ const initialState: Bag = {
     color: "",
     comparisonData: 0,
     graphdata: [
-        {type: "", color: "", amount: 0},
-        {type: "", color: "", amount: 0},
-        {type: "", color: "", amount: 0},
-        {type: "", color: "", amount: 0},
-        {type: "", color: "", amount: 0},
-        {type: "", color: "", amount: 0},
-        {type: "", color: "", amount: 0},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
+        {amount: 0,color: "",type: "",},
     ],
     name: "",
     _id: "",
 
-    bottomColor: "",
-    topColor: "",
-    onlineSEK: 0,
-    onlineEUR: 0,
-    retailSEK: 0,
-    retailEUR: 0,
+    transparencyData: [{
+        value1: 0,
+        value2: 0,
+        value3: 0,
+        value4: 0,
+    }]
 };
 
 
@@ -67,21 +67,9 @@ export const bagSlice = createSlice({
         },
         editGraphData: (state, action) => {
             state.graphdata = action.payload;
-            
-
-            console.log(state.graphdata)
-        },
-        editComparisonData: (state, action) => {
-            state.comparisonData = action.payload;
-            console.log(state.comparisonData)
         },
         editTransparencyData: (state, action) => {
-            state.bottomColor = action.payload.bottomColor;
-            state.topColor = action.payload.topColor;
-            state.onlineSEK = action.payload.onlineSEK;
-            state.onlineEUR = action.payload.onlineEUR;
-            state.retailSEK = action.payload.retailSEK;
-            state.retailEUR = action.payload.retailEUR;
+            state.transparencyData = action.payload;
         },
     },
 });
@@ -89,6 +77,5 @@ export const bagSlice = createSlice({
 export const { setBagState } = bagSlice.actions;
 export const { editGraphData } = bagSlice.actions;
 export const { editTransparencyData } = bagSlice.actions;
-export const { editComparisonData } = bagSlice.actions;
 
 export default bagSlice.reducer;
