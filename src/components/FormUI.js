@@ -11,13 +11,11 @@ import {useNavigate} from 'react-router-dom';
 
 
 import { useAppDispatch, useAppSelector } from '../context/hooks';
-
-import { editGraphData, setBagState, editComparisonData } from '../context/bagSlice';
-
 import { setBagState } from '../context/bagSlice';
 import iIcon from '../Image/240px-Infobox_info_icon.png'
 import piechart1Background from '../Image/piechart1Background.png'
 import piechart3Background from '../Image/piechart3Background.png'
+
 
 
 
@@ -39,8 +37,6 @@ const FormUI = () => {
     const inputRef = useRef([]);
     const colorRef = useRef([]);
     const comparisonInput = useRef([]);
-
-
     const [isHoveringFirstGraph, setIsHoveringFirstGraph] = useState(false);
     const [isHoveringSecondGraph, setIsHoveringSecondGraph] = useState(false);
 
@@ -49,11 +45,7 @@ const FormUI = () => {
         fetchDatabyName()
         
 
-
-    const [isActive, setActive] = useState(false);
-
-    const toggleClass = () => {
-        setActive(true);
+    }, [])
 
 
     const handleMouseOverFirst = () => {
@@ -87,13 +79,8 @@ const FormUI = () => {
         setData(resp)
         dispatch(setBagState(resp.data));
         return resp
-
     }
     
-    useEffect(() => {
-        fetchDatabyName()
-    }, [])
- 
     const fetchDatabyName = async () => {
         const resp = await axios.get("https://bycloudberry-server.onrender.com/getbagnames", {
          
@@ -123,8 +110,7 @@ const FormUI = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const graphdata = [
-            
+        api.updateBag({name : bag.name, bagtype: bag.type, graphdata: [
             { type: "Leather", amount: parseInt(inputRef.current[0].value), color: colorRef.current[0].value},
             { type: "Production", amount: parseInt(inputRef.current[1].value), color: colorRef.current[1].value },
             { type: "Logistics", amount: parseInt(inputRef.current[2].value), color: colorRef.current[2].value },
@@ -132,23 +118,30 @@ const FormUI = () => {
             { type: "Lining", amount: parseInt(inputRef.current[4].value), color: colorRef.current[4].value },
             { type: "Packaging", amount: parseInt(inputRef.current[5].value), color: colorRef.current[5].value},
             { type: "Details", amount: parseInt(inputRef.current[6].value), color: colorRef.current[6].value },
-        ]
-        
-        
-        api.updateBag({
-            name: bagState.name,
-            bagtype: bagState.bagtype,
-            graphdata: graphdata,
-            comparisonData: comparisonInput.current.value,
-        }).then((res) => {
-            console.log(res)
-        })
-
-        dispatch(editGraphData(graphdata))
-        dispatch(editComparisonData(comparisonInput.current.value))
-        navigate("/transparency")
+            
+          ]}).then((res) => {
+           
+          });
         }
+        
+    const handleChange = () => {
+        setData(data)
+        
+        
+
+
+    }
+    const [isActive, setActive] = useState(false);
+
+    const toggleClass = () => {
+        setActive(true);
+    }
     
+
+    
+    
+
+
     function renderData() {
             var renderData = bagState ? bagState.graphdata.map((item, index) => {
         
@@ -174,13 +167,42 @@ const FormUI = () => {
                     </div>
                    
                     </>
+
                 )
 
             }): "";
 
         return renderData;
+        
     }
+/*
+    function checkHexValues () {
+        let hexValue = "/^3\d{9}$/";
 
+        if (colorRef.match(hexValue)) {
+            alert("Success!")
+
+            return true;    
+
+        }
+
+        else {
+            alert("Failed!")
+
+            return false; 
+
+        }
+
+
+
+    }
+  
+
+   */
+   
+    
+
+    
     function ComparisonData() {
         
         var comparisonData = bagState? bagState.comparisonData:""
@@ -206,8 +228,47 @@ const FormUI = () => {
             </div>
 
         )
+
     }
    
+
+    
+    // useEffect(() => {
+    //     storeBags()
+        
+        
+        
+        
+
+    // }, [])
+
+    function setCurrentBag(value) {
+       //value has the format of "disa,bagtype"
+       // we need to split it into two variables name and type in that order
+         var name = value.split(",")[0]
+        var type = value.split(",")[1]
+        const bag = {name: name, type: type};
+        setBag(bag);
+        
+    }
+    
+   function drpdown() {
+
+        var renderData = dataName ? dataName.data.map((item) => {
+        const all_products = item.name
+        const type = item.type
+     
+        
+        return (
+            <option  value= {[all_products, type]}> {all_products} {type}</option>
+        )
+        
+  }): "";
+  
+   return renderData;
+   
+   }
+
    const routeToHome = () => {
     navigate("/")
   }
@@ -223,9 +284,6 @@ const FormUI = () => {
                      
                 </div>
              </div>
-
-                <h1>{bagState.name}</h1>
-
                 
                 <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
                 
@@ -245,7 +303,7 @@ const FormUI = () => {
                         )}    
 
 
-
+                    
                     
             {renderData()}
             {ComparisonData()}

@@ -33,6 +33,11 @@ function Header () {
             </NavLink>
             </li>
 
+            <li>
+            <NavLink to='/form'>
+              GRAPHDATA
+            </NavLink>
+          </li>
           <li>
             <NavLink to='/settings'>
               SETTINGS
