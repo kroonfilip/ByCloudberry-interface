@@ -83,7 +83,17 @@ const FormUI = () => {
         ]
         
         
+        api.updateBag({
+            name: bagState.name,
+            bagtype: bagState.bagtype,
+            graphdata: graphdata,
+            comparisonData: comparisonInput.current.value,
+        }).then((res) => {
+            console.log(res)
+        })
+
         dispatch(editGraphData(graphdata))
+        dispatch(editComparisonData(comparisonInput.current.value))
         navigate("/transparency")
         }
     

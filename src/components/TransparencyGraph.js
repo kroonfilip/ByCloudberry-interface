@@ -152,13 +152,19 @@ const TransparencyGraph = ({bagData}) => {
             retailEUR: values.retailEUR,
         }
 
-        console.log(transparency)
+        api.updateBag({
+            name: bagState.name,
+            bagtype: bagState.bagtype,
+            transparency: transparency,
+        }).then((res) => {
+            console.log(res)
+        })
+
         
         dispatch(editTransparencyData(transparency))
    
-        console.log(bagState)
-        api.updateBag({name: bagState.name, bagtype: bagState.bagtype}, bagState)
-        // navigate("/")
+       
+        navigate("/")
     }
 
     return (
