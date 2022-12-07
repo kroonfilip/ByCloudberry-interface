@@ -87,7 +87,7 @@ const FormUI = () => {
             name: bagState.name,
             bagtype: bagState.bagtype,
             graphdata: graphdata,
-            comparisonData: comparisonInput.current.value,
+            comparisonData: parseInt(comparisonInput.current.value),
         }).then((res) => {
             console.log(res)
         })

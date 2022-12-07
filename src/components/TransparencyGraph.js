@@ -146,10 +146,10 @@ const TransparencyGraph = ({bagData}) => {
         const transparency = {
             bottomColor: values.bottomColor,
             topColor: values.topColor,
-            onlineSEK: values.onlineSEK,
-            onlineEUR: values.onlineEUR,
-            retailSEK: values.retailSEK,
-            retailEUR: values.retailEUR,
+            onlineSEK: parseInt(values.onlineSEK),
+            onlineEUR: parseInt(values.onlineEUR),
+            retailSEK: parseInt(values.retailSEK),
+            retailEUR: parseInt(values.retailEUR),
         }
 
         api.updateBag({
