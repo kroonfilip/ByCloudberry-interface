@@ -49,6 +49,7 @@ const TransparencyGraph = ({bagData}) => {
                     <br></br>
                     <input
                      name='bottomColor' 
+                     placeholder={bagState.bottomColor}
                      onChange={handleInputChange} 
                      value={values.bottomColor} >
                      </input>
@@ -61,6 +62,7 @@ const TransparencyGraph = ({bagData}) => {
                     <br></br>
                     <input
                      name='topColor' 
+                     placeholder={bagState.topColor}
                      onChange={handleInputChange} 
                      value ={values.topColor} >
                      </input>
@@ -80,6 +82,7 @@ const TransparencyGraph = ({bagData}) => {
                             <br></br>
                             <input 
                             name='onlineSEK' 
+                            placeholder={bagState.onlineSEK}
                             onChange={handleInputChange} 
                             value={values.onlineSEK} >
                             </input>
@@ -91,6 +94,7 @@ const TransparencyGraph = ({bagData}) => {
                             <br></br>
                             <input 
                             name='onlineEUR' 
+                            placeholder={bagState.onlineEUR}
                             onChange={handleInputChange} 
                             value={values.onlineEUR} >
                             </input>
@@ -114,6 +118,7 @@ const TransparencyGraph = ({bagData}) => {
                             <input 
                             onChange={handleInputChange} 
                             name='retailSEK'
+                            placeholder={bagState.retailSEK}
                             type="number" 
                             step="1" min="1"  
                             value={values.retailSEK}>
@@ -128,6 +133,7 @@ const TransparencyGraph = ({bagData}) => {
                             <input 
                             onChange={handleInputChange} 
                             name='retailEUR'
+                            placeholder={bagState.retailEUR}
                             type="number" 
                             step="1" min="1"  
                             value={values.retailEUR}>

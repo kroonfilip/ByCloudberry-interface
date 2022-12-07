@@ -139,7 +139,7 @@ const FormUI = () => {
             <label>
                 Comparison Data
                 <br></br>
-               <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={comparisonData}>        
+               <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={bagState.comparisonData}>        
                </input>
             </label>
             </div>
