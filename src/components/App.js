@@ -16,13 +16,13 @@ const App = () => {
     localStorage.getItem('isLoggedIn') === 'true' ? true : false
   );
 
-  if (!loggedIn) {
+  /* if (!loggedIn) {
     return (
       <BrowserRouter>
         <LogIn setLoggedIn={setLoggedIn} />
       </BrowserRouter>
     );
-  }
+  }  */
 
   return (
     <>
