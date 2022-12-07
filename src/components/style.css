@@ -10,11 +10,7 @@ body {
   }
 
 #header {
-  position: absolute;
-  top:30%;
-  bottom:40%;
-  left:20%;
-  right:20%;
+  
   color: white;
 
 }  
@@ -142,13 +138,8 @@ select {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
-  #subHeadline {
-    font-family: "Quicksand"; 
-    font-size: 20px; 
-    margin: 10;
-  }
  label, input {
-  font-size: 16px;
+  
   padding:11px;
   margin: auto;
   width: 55%;
@@ -167,9 +158,6 @@ input{
   
   
 
-}
-#inputTransparency{
-  width: 25%;
 }
 .field{
   float: left;
@@ -358,13 +346,5 @@ input:checked + .slider:before {
   color: red;
 }
 
-@media screen and (max-width: 495px) {
-  #header {
-    position: absolute;
-    top:18%;
-  
-    color: white;
-  
-  } 
-}
+
  

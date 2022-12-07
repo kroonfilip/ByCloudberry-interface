@@ -9,16 +9,8 @@ import Header from './Header';
 import {useNavigate} from 'react-router-dom';
 
 
-
 import { useAppDispatch, useAppSelector } from '../context/hooks';
-
 import { editGraphData, setBagState, editComparisonData } from '../context/bagSlice';
-
-import { setBagState } from '../context/bagSlice';
-import iIcon from '../Image/240px-Infobox_info_icon.png'
-import piechart1Background from '../Image/piechart1Background.png'
-import piechart3Background from '../Image/piechart3Background.png'
-
 
 
 
@@ -40,54 +32,10 @@ const FormUI = () => {
     const colorRef = useRef([]);
     const comparisonInput = useRef([]);
 
-
-    const [isHoveringFirstGraph, setIsHoveringFirstGraph] = useState(false);
-    const [isHoveringSecondGraph, setIsHoveringSecondGraph] = useState(false);
-
-    
-    useEffect(() => {
-        fetchDatabyName()
-        
-
-
     const [isActive, setActive] = useState(false);
 
     const toggleClass = () => {
         setActive(true);
-
-
-    const handleMouseOverFirst = () => {
-        setIsHoveringFirstGraph(true);
-    };
-  
-    const handleMouseOutFirst = () => {
-        setIsHoveringFirstGraph(false);
-    };
-
-    const handleMouseOverSecond = () => {
-        setIsHoveringSecondGraph(true);
-    };
-  
-    const handleMouseOutSecond = () => {
-        setIsHoveringSecondGraph(false);
-    };
-
-    
-    const fetchData = async(value) => {
-        //value has the format of "disa,handbag"
-        //we need to split it into two variables, name and type
-        const [name, type] = value.split(",");
-        const resp = await axios.get("https://bycloudberry-server.onrender.com/getbag", {
-          params: {
-            name: name,
-            type: type,
-          },
-          
-        })
-        setData(resp)
-        dispatch(setBagState(resp.data));
-        return resp
-
     }
     
     useEffect(() => {
@@ -156,7 +104,7 @@ const FormUI = () => {
                     
                    <>
                     <div className='field'>
-                    <label key={index} >
+                    <label key={index}>
                      {item.type} (kg CO2E) 
                      <br></br>
                     <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount} value={item.value}>
@@ -190,15 +138,6 @@ const FormUI = () => {
             
             <label>
                 Comparison Data
-                <img onMouseOver={handleMouseOverSecond} onMouseOut={handleMouseOutSecond} src={iIcon} width={15} height={15}></img>
-                   
-                   <br></br>
-                       {isHoveringSecondGraph && (
-                           <div>
-                               <img id='b' src={piechart3Background} alt='img' width={470} height={350}></img>
-                           
-                           </div>
-                       )}         
                 <br></br>
                <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={comparisonData}>        
                </input>
@@ -219,33 +158,11 @@ const FormUI = () => {
             
             <div id="hero-image">
                 <div id="hero-text">
-                <h1 id="header" style={{ fontSize: "50px"}}>GRAPH DATA FORM</h1>
+                <h1 id="header" style={{ fontSize: "50px" }}>GRAPH DATA FORM</h1>
                      
                 </div>
              </div>
-
                 <h1>{bagState.name}</h1>
-
-                
-                <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
-                
-                    <select id="dropdown"style={{ textAlign:'center'}} value={productValue}  onChange={e=> {fetchData(e.target.value);setValue(e.target.value); setCurrentBag(e.target.value); handleChange();toggleClass(e.target.value) }} >
-                    <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
-                    {drpdown()}
-                    
-                    </select>
-                    <h1>{bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
-                   
-                    <br></br>
-                        {isHoveringFirstGraph && (
-                            <div>
-                                <img id='b' src={piechart1Background} alt='img' width={250} height={200}></img>
-                            
-                            </div>
-                        )}    
-
-
-
                     
             {renderData()}
             {ComparisonData()}
