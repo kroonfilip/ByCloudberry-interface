@@ -62,10 +62,6 @@ select {
   margin-bottom: 20px;
   margin-right: 10px;
   
- 
-
-
-
 }
 
 
@@ -162,10 +158,6 @@ input{
 .field > input {
   width: 50%;
   text-align: center;
- 
-  
-  
-  
 
 }
 #inputTransparency{
@@ -364,3 +356,4 @@ input:checked + .slider:before {
   } 
 }
  
+

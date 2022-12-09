@@ -280,7 +280,8 @@ const FormUI = () => {
             
             <div id="hero-image">
                 <div id="hero-text">
-                <h1 id="header" style={{ fontSize: "50px"}}>GRAPH DATA FORM</h1>
+                <h1 id="header" style={{ fontSize: "50px"}}> PIE CHART FORM
+</h1>
                      
                 </div>
              </div>
