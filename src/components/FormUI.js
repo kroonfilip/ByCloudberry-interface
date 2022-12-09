@@ -9,13 +9,13 @@ import Header from './Header';
 import {useNavigate} from 'react-router-dom';
 
 
-
 import { useAppDispatch, useAppSelector } from '../context/hooks';
 import { setBagState } from '../context/bagSlice';
 import iIcon from '../Image/240px-Infobox_info_icon.png'
 import piechart1Background from '../Image/piechart1Background.png'
 import piechart3Background from '../Image/piechart3Background.png'
 
+import { editGraphData, setBagState, editComparisonData } from '../context/bagSlice';
 
 
 
@@ -80,6 +80,8 @@ const FormUI = () => {
         dispatch(setBagState(resp.data));
         return resp
     }
+
+    
     
     const fetchDatabyName = async () => {
         const resp = await axios.get("https://bycloudberry-server.onrender.com/getbagnames", {
@@ -108,6 +110,8 @@ const FormUI = () => {
        
       }, []);
 
+    
+
     const handleSubmit = (e) => {
         e.preventDefault()
         api.updateBag({name : bag.name, bagtype: bag.type, graphdata: [
@@ -128,6 +132,14 @@ const FormUI = () => {
         setData(data)
         
         
+        api.updateBag({
+            name: bagState.name,
+            bagtype: bagState.bagtype,
+            graphdata: graphdata,
+            comparisonData: parseInt(comparisonInput.current.value),
+        }).then((res) => {
+            console.log(res)
+        })
 
 
     }
@@ -137,7 +149,7 @@ const FormUI = () => {
         setActive(true);
     }
     
-
+   
     
     
 
@@ -149,7 +161,7 @@ const FormUI = () => {
                     
                    <>
                     <div className='field'>
-                    <label key={index} >
+                    <label key={index}>
                      {item.type} (kg CO2E) 
                      <br></br>
                     <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount} value={item.value}>
@@ -212,17 +224,8 @@ const FormUI = () => {
             
             <label>
                 Comparison Data
-                <img onMouseOver={handleMouseOverSecond} onMouseOut={handleMouseOutSecond} src={iIcon} width={15} height={15}></img>
-                   
-                   <br></br>
-                       {isHoveringSecondGraph && (
-                           <div>
-                               <img id='b' src={piechart3Background} alt='img' width={470} height={350}></img>
-                           
-                           </div>
-                       )}         
                 <br></br>
-               <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={comparisonData}>        
+               <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={bagState.comparisonData}>        
                </input>
             </label>
             </div>
@@ -280,7 +283,7 @@ const FormUI = () => {
             
             <div id="hero-image">
                 <div id="hero-text">
-                <h1 id="header" style={{ fontSize: "50px"}}>GRAPH DATA FORM</h1>
+                <h1 id="header" style={{ fontSize: "50px" }}>PIE CHART FORM</h1>
                      
                 </div>
              </div>
@@ -304,6 +307,7 @@ const FormUI = () => {
 
 
                     
+                <h1>{bagState.name}</h1>
                     
             {renderData()}
             {ComparisonData()}

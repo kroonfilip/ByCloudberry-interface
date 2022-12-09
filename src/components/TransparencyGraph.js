@@ -4,19 +4,21 @@ import "./style.css";
 import axios from "axios";
 import ColorPicker from './colorPicker';
 
-import updateBag from './Api';
+import api from './Api';
 import Header from './Header';
-import iIcon from '../Image/240px-Infobox_info_icon.png'
-import bottomColorPic from '../Image/bottomColorPic.png'
-import topColorPic from '../Image/topColorPic.png'
-import onlineEURPic from '../Image/onlineEURPic.png'
-import retailEURPic from '../Image/retailEURPic.png'
-import onlineSEKPic from '../Image/onlineSEKPic.png'
-import retailSEKPic from '../Image/retailSEKPic.png'
+import {useNavigate} from 'react-router-dom';
 
-const TransparencyGraph = () => {
+import { useAppDispatch, useAppSelector } from '../context/hooks';
+import { editTransparencyData, setBagState } from '../context/bagSlice';
+
+const TransparencyGraph = ({bagData}) => {
     const url = "https://bycloudberry-server.onrender.com/getbag";
     //const [data, setData] = useState("");
+
+    const bagState = useAppSelector((state) => state.bag);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate()
+
     const [isHoveringBottom, setIsHoveringBottom] = useState(false);
     const [isHoveringTop, setIsHoveringTop] = useState(false);
     
@@ -25,104 +27,130 @@ const TransparencyGraph = () => {
     
     const [isHoveringOEUR, setIsHoveringOEUR] = useState(false);
     const [isHoveringREUR, setIsHoveringREUR] = useState(false);
-    
+
     /* 
         To handle the states of the picture displaying the 'help'-image - Bottom color
     */
-    const handleMouseOverBottom = () => {
-        setIsHoveringBottom(true);
-    };
-  
-    const handleMouseOutBottom = () => {
-      setIsHoveringBottom(false);
-    };
-
-  /* 
-        To handle the states of the picture displaying the 'help'-image - Top color
-    */
-    const handleMouseOverTop = () => {
-      setIsHoveringTop(true);
-    };
-  
-    const handleMouseOutTop = () => {
-      setIsHoveringTop(false);
-    };
-
-    /* 
-        To handle the states of the picture displaying the 'help'-image - Online SEK
-    */
-    const handleMouseOutOSEK = () => {
-      setIsHoveringOSEK(false);
-    };
-    const handleMouseOverOSEK = () => {
-      setIsHoveringOSEK(true);
-    };
-    /* 
-        To handle the states of the picture displaying the 'help'-image - Retail SEK
-    */
-  
-    const handleMouseOverRSEK = () => {
-        setIsHoveringRSEK(true);
-    };
+        const handleMouseOverBottom = () => {
+            setIsHoveringBottom(true);
+        };
+      
+        const handleMouseOutBottom = () => {
+          setIsHoveringBottom(false);
+        };
     
-    const handleMouseOutRSEK = () => {
-      setIsHoveringRSEK(false);
-    };
-    /* 
-        To handle the states of the picture displaying the 'help'-image - Retail EUR
-    */
-
-    const handleMouseOverREUR = () => {
-        setIsHoveringREUR(true);
-    };
+      /* 
+            To handle the states of the picture displaying the 'help'-image - Top color
+        */
+        const handleMouseOverTop = () => {
+          setIsHoveringTop(true);
+        };
+      
+        const handleMouseOutTop = () => {
+          setIsHoveringTop(false);
+        };
     
-    const handleMouseOutREUR = () => {
-      setIsHoveringREUR(false);
-    };
-  
-    /* 
-        To handle the states of the picture displaying the 'help'-image - Online EUR
-    */
-    const handleMouseOverOEUR = () => {
-        setIsHoveringOEUR(true);
-    };
+        /* 
+            To handle the states of the picture displaying the 'help'-image - Online SEK
+        */
+        const handleMouseOutOSEK = () => {
+          setIsHoveringOSEK(false);
+        };
+        const handleMouseOverOSEK = () => {
+          setIsHoveringOSEK(true);
+        };
+        /* 
+            To handle the states of the picture displaying the 'help'-image - Retail SEK
+        */
+      
+        const handleMouseOverRSEK = () => {
+            setIsHoveringRSEK(true);
+        };
+        
+        const handleMouseOutRSEK = () => {
+          setIsHoveringRSEK(false);
+        };
+        /* 
+            To handle the states of the picture displaying the 'help'-image - Retail EUR
+        */
     
-    const handleMouseOutOEUR = () => {
-      setIsHoveringOEUR(false);
+        const handleMouseOverREUR = () => {
+            setIsHoveringREUR(true);
+        };
+        
+        const handleMouseOutREUR = () => {
+          setIsHoveringREUR(false);
+        };
+      
+        /* 
+            To handle the states of the picture displaying the 'help'-image - Online EUR
+        */
+        const handleMouseOverOEUR = () => {
+            setIsHoveringOEUR(true);
+        };
+        
+        const handleMouseOutOEUR = () => {
+          setIsHoveringOEUR(false);
+        };
+
+    const initialValues = {
+        bottomColor: "",
+        topColor: "",
+        onlineSEK: "",
+        onlineEUR: "",
+        retailSEK: "",
+        retailEUR: "",
     };
-  
 
-    
-    const transparencydata = {
-        bottomColor: "#D9D9D9",
-        topColor: "#A6A6A6",
-        online: {
-            SEK: 5645,
-            EUR: 525,
-            
-        },
-        retail: {
-            SEK: 14113,
-            EUR: 1313,
+    const [values, setValues] = useState(initialValues);
 
-        },
+    function renderColorData(){
+        return (
+            <div>
+                <h1 id='subHeadline'>Colors</h1>
+                
+                <div >
+                    <label >
+                        Bottom Color (Hex value) <img onMouseOver={handleMouseOverBottom} onMouseOut={handleMouseOutBottom} src={iIcon} width={15} height={15}></img>
+                        <br></br>
+                        {isHoveringBottom && (
+                            <div>
+                                <img id='b' src={bottomColorPic} alt='img' width={350} height={350}></img>
+                              
+                            </div>
+                        )}
+                        <input id='inputTransparency' placeholder = {bagState.bottomColor} ></input>
+                    </label>
+                        
+         </div>
+         </div>
+        )}
+         
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setValues({
+            ...values,
+            [name]: value,
+        });
     }
+
    function renderColorData(){
     return (
         <div>
-            <h1 id='subHeadline'>Colors</h1>
+            <h1 style={{ fontFamily: "Quicksand", fontSize: "20px", textAlign: 'center',}}>Colors</h1>
             
-            <div >
-                <label >
-                    Bottom Color (Hex value) <img onMouseOver={handleMouseOverBottom} onMouseOut={handleMouseOutBottom} src={iIcon} width={15} height={15}></img>
+            <div>
+                <label>
+                    Bottom Color (Hex value)
                     <br></br>
-                    {isHoveringBottom && (
-                        <div>
-                            <img id='b' src={bottomColorPic} alt='img' width={350} height={350}></img>
-                          
-                        </div>
-                    )}
-                    <input id='inputTransparency' placeholder = {transparencydata.bottomColor} ></input>
+                    <input
+                     name='bottomColor' 
+                     placeholder={bagState.bottomColor}
+                     onChange={handleInputChange} 
+                     value={values.bottomColor} >
+                     </input>
+                    
                 </label>
             </div>
             <div >
@@ -135,7 +163,15 @@ const TransparencyGraph = () => {
                           
                         </div>
                     )}
-                    <input id='inputTransparency' placeholder = {transparencydata.topColor} ></input>
+                    <input id='inputTransparency' placeholder = {bagState.topColor} ></input>
+                    Top color (Hex value)
+                    <br></br>
+                    <input
+                     name='topColor' 
+                     placeholder={bagState.topColor}
+                     onChange={handleInputChange} 
+                     value ={values.topColor} >
+                     </input>
                 </label>
             </div>        
         </div>
@@ -158,7 +194,7 @@ const TransparencyGraph = () => {
                             </div>
                         )}
                 
-                        <input id='inputTransparency' placeholder = {transparencydata.online.SEK} ></input>
+                        <input id='inputTransparency' placeholder = {bagState.online.SEK} ></input>
                     <div >
                         <label style={{}}>
                             EUR <img onMouseOver={handleMouseOverOEUR} onMouseOut={handleMouseOutOEUR} src={iIcon} width={15} height={15}></img>
@@ -170,8 +206,34 @@ const TransparencyGraph = () => {
                                 
                                 </div>
                             )}
-                            <input id='inputTransparency' placeholder = {transparencydata.online.EUR} ></input>
+                            <input id='inputTransparency' placeholder = {bagState.online.EUR} ></input>
+                    <h1 style={{ fontFamily: "Quicksand", fontSize: "20px", }}>Online</h1>
+                    
+                    <div>
+                        <label>
+                            SEK
+                            <br></br>
+                            <input 
+                            name='onlineSEK' 
+                            placeholder={bagState.onlineSEK}
+                            onChange={handleInputChange} 
+                            value={values.onlineSEK} >
+                            </input>
+                        </label>
+                    </div>
+                    <div >
+                        <label>
+                            EUR
+                            <br></br>
+                            <input 
+                            name='onlineEUR' 
+                            placeholder={bagState.onlineEUR}
+                            onChange={handleInputChange} 
+                            value={values.onlineEUR} >
+                            </input>
+                        </label>
                     </div>        
+                </div>
                 </div>
               
             )
@@ -195,7 +257,7 @@ const TransparencyGraph = () => {
                                 </div>
                             )}
                         
-                            <input id='inputTransparency' type="number" step="1" min="1"  placeholder = {transparencydata.retail.SEK}>
+                            <input id='inputTransparency' type="number" step="1" min="1"  placeholder = {bagState.retail.SEK}>
                             </input>
                     </div>
                     <div >
@@ -209,18 +271,46 @@ const TransparencyGraph = () => {
                                 
                                 </div>
                             )}
-                            <input id='inputTransparency' type="number" step="1" min="1"  placeholder = {transparencydata.retail.EUR}>
+                            <input id='inputTransparency' type="number" step="1" min="1"  placeholder = {bagState.retail.EUR}>
                             </input>
                         
                     </div>
                 </div>
             )
 }
+    
+    const handleSubmit = (e) => {
+       
+        e.preventDefault()
+
+        const transparency = {
+            bottomColor: values.bottomColor,
+            topColor: values.topColor,
+            onlineSEK: parseInt(values.onlineSEK),
+            onlineEUR: parseInt(values.onlineEUR),
+            retailSEK: parseInt(values.retailSEK),
+            retailEUR: parseInt(values.retailEUR),
+        }
+
+        api.updateBag({
+            name: bagState.name,
+            bagtype: bagState.bagtype,
+            transparency: transparency,
+        }).then((res) => {
+            console.log(res)
+        })
+
+        
+        dispatch(editTransparencyData(transparency))
+   
+       
+        navigate("/")
+    }
 
     return (
         <>
             < Header/>
-            <form className='form' >
+            <form className='form' onSubmit={handleSubmit}>
             
                 <div id="hero-image">
                     <div id="hero-text">
