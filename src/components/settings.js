@@ -10,7 +10,7 @@ function Settings () {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        authorization: 'Bearer *NYCKEL HÄR*'
+        authorization: process.env.RENDER_API_KEY
       }
     };
     
@@ -24,7 +24,7 @@ function Settings () {
         method: 'POST',
         headers: {
           accept: 'application/json',
-          authorization: 'Bearer *NYCKEL HÄR*'
+          authorization: process.env.RENDER_API_KEY
         }
       };
       
@@ -41,7 +41,8 @@ function Settings () {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          authorization: 'Bearer *NYCKEL HÄR*'
+          authorization: process.env.RENDER_API_KEY
+
         }
       };  
       fetch('https://proxy.cors.sh/https://api.render.com/v1/services/srv-cd6gm4pgp3jlirg6l85g', options)
