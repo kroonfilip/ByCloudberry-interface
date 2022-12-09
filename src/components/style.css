@@ -12,7 +12,11 @@ body {
 #header {
   
   color: white;
-
+  top: 30%;
+  bottom: 40%;
+  left: 20%;
+  right:20%;
+  color: white;
 }  
 
 select {
@@ -343,4 +347,12 @@ input:checked + .slider:before {
 }
 
 
- 
+@media screen and (max-width: 495px) {
+  #header {
+    position: absolute;
+    top:18%;
+
+    color: white;
+
+  } 
+}
