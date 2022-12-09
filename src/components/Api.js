@@ -11,7 +11,7 @@ export async function postNewBag(bag) {
 
 }
    
-export async function updateBag(bag) {
+
     
    
 export async function updateBag(bag) {
@@ -32,4 +32,4 @@ const api = {
     updateBag,
     deleteBag
 }
-export default api
+export default api;
