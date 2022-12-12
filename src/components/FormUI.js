@@ -253,9 +253,6 @@ const FormUI = () => {
                             </div>
                         )}    
 
-
-                    
-                <h1>{bagState.name}</h1>
                     
             {renderData()}
             {ComparisonData()}

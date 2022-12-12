@@ -149,9 +149,16 @@ const TransparencyGraph = ({}) => {
             
             <div>
                 <label>
-                    Bottom Color (Hex value)
+                    Bottom Color (Hex value) <img onMouseOver={handleMouseOverBottom} onMouseOut={handleMouseOutBottom} src={iIcon} width={15} height={15}></img>
                     <br></br>
+                    {isHoveringBottom && (
+                        <div>
+                            <img id='b' src={bottomColorPic} alt='img' width={350} height={350}></img>
+                          
+                        </div>
+                    )}
                     <input
+                    id='inputTransparency'
                      name='bottomColor' 
                      placeholder={bagState.bottomColor}
                      onChange={handleInputChange} 
@@ -173,6 +180,7 @@ const TransparencyGraph = ({}) => {
                     
                     <br></br>
                     <input
+                     id='inputTransparency'
                      name='topColor' 
                      placeholder={bagState.topColor}
                      onChange={handleInputChange} 
