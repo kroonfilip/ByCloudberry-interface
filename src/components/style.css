@@ -68,11 +68,8 @@ select {
 
 }
 
-html {
-  scroll-behavior: smooth;
-}
+
 #hero-image {
-  
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://i.pinimg.com/originals/25/09/2a/25092adf72f3feb759bbd871948cd6b4.jpg");
 
