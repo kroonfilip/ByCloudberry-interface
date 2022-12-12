@@ -3,14 +3,14 @@ import Header from './Header';
 
 function Settings () {
   const [APIStatus, setAPIStatus] = useState("");
-    
+  
   function handleServer() {
     if (APIStatus != "not_suspended") {
     const options = {
       method: 'POST',
       headers: {
         accept: 'application/json',
-        authorization: process.env.RENDER_API_KEY
+        authorization: process.env.REACT_APP_RENDER_API_KEY
       }
     };
     
@@ -24,7 +24,7 @@ function Settings () {
         method: 'POST',
         headers: {
           accept: 'application/json',
-          authorization: process.env.RENDER_API_KEY
+          authorization: process.env.REACT_APP_RENDER_API_KEY
         }
       };
       
@@ -36,12 +36,12 @@ function Settings () {
   }
 
     useEffect(() => {
-
+      
     const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          authorization: process.env.RENDER_API_KEY
+          authorization: process.env.REACT_APP_RENDER_API_KEY
 
         }
       };  
