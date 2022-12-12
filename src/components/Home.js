@@ -31,6 +31,7 @@ const fetchDatabyName = async () => {
   setDataName(resp)
   return resp
 }
+/*
 const handleSubmit = (value) => {
   
   console.log(value)
@@ -48,7 +49,7 @@ const handleSubmit = (value) => {
   
 }
 
-    
+  */  
 const fetchData = async(value) => {
   //value has the format of "disa,handbag"
   //we need to split it into two variables, name and type
@@ -98,6 +99,7 @@ const handleOnChange = (e) => {
 const handleInput= (e) => {
   if(e.key === 'Enter'){
     console.log(inputValues[0])
+    console.log("val"+typeValue)
     setNewDataName(inputValues)
     api.postNewBag({
       name: inputValues[0],

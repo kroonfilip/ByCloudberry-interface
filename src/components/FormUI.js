@@ -9,13 +9,12 @@ import Header from './Header';
 import {useNavigate} from 'react-router-dom';
 
 
-
-import { useAppDispatch, useAppSelector } from '../context/hooks';
-import { setBagState } from '../context/bagSlice';
+import { useAppDispatch, useAppSelector } from '../context/hooks'
 import iIcon from '../Image/240px-Infobox_info_icon.png'
 import piechart1Background from '../Image/piechart1Background.png'
 import piechart3Background from '../Image/piechart3Background.png'
 
+import { editGraphData, setBagState, editComparisonData } from '../context/bagSlice';
 
 
 
@@ -81,6 +80,8 @@ const FormUI = () => {
         dispatch(setBagState(resp.data));
         return resp
     }
+
+    
     
     const fetchDatabyName = async () => {
         const resp = await axios.get("https://bycloudberry-server.onrender.com/getbagnames", {
@@ -109,9 +110,11 @@ const FormUI = () => {
        
       }, []);
 
+    
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        api.updateBag({name : bag.name, bagtype: bag.type, graphdata: [
+       const graphdata = [
             { type: "Leather", amount: parseInt(inputRef.current[0].value), color: colorRef.current[0].value},
             { type: "Production", amount: parseInt(inputRef.current[1].value), color: colorRef.current[1].value },
             { type: "Logistics", amount: parseInt(inputRef.current[2].value), color: colorRef.current[2].value },
@@ -120,9 +123,24 @@ const FormUI = () => {
             { type: "Packaging", amount: parseInt(inputRef.current[5].value), color: colorRef.current[5].value},
             { type: "Details", amount: parseInt(inputRef.current[6].value), color: colorRef.current[6].value },
             
+
           ]}).then((res) => {
 
           });
+
+       ]
+        api.updateBag({
+            name: bagState.name,
+            bagtype: bagState.bagtype,
+            graphdata: graphdata,
+            comparisonData: parseInt(comparisonInput.current.value),
+        }).then((res) => {
+            console.log(res)
+        })
+        dispatch(editGraphData(graphdata))
+        dispatch(editComparisonData(comparisonInput.current.value))
+        navigate("/transparency")
+
 
         }
     
@@ -130,16 +148,21 @@ const FormUI = () => {
 
     const handleChange = () => {
         setData(data)
+
         scrollRef.current.scrollIntoView();
+
+        
+       
     }
     const [isActive, setActive] = useState(false);
 
     const toggleClass = () => {
         setActive(true);
+
     }     
 
-    
-    
+
+    }
 
 
     function renderData() {
@@ -149,7 +172,7 @@ const FormUI = () => {
                     
                    <>
                     <div className='field'>
-                    <label key={index} >
+                    <label key={index}>
                      {item.type} (kg CO2E) 
                      <br></br>
                     <input type="number" step="0.001" min="0.000"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount} value={item.value}>
@@ -175,31 +198,7 @@ const FormUI = () => {
         return renderData;
         
     }
-/*
-    function checkHexValues () {
-        let hexValue = "/^3\d{9}$/";
 
-        if (colorRef.match(hexValue)) {
-            alert("Success!")
-
-            return true;    
-
-        }
-
-        else {
-            alert("Failed!")
-
-            return false; 
-
-        }
-
-
-
-    }
-  
-
-   */
-   
     
 
     
@@ -213,46 +212,29 @@ const FormUI = () => {
             <label>
                 Comparison Data
                 <img onMouseOver={handleMouseOverSecond} onMouseOut={handleMouseOutSecond} src={iIcon} width={15} height={15}></img>
-                   
+
                    <br></br>
                        {isHoveringSecondGraph && (
                            <div>
                                <img id='b' src={piechart3Background} alt='img' width={470} height={350}></img>
-                           
+
                            </div>
+
                        )}         
                 <br></br>
-               <input type="number" step="0.001" min="0.000" ref={comparisonInput} defaultValue={comparisonData}>        
+              
+
+
+               <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={bagState.comparisonData}>        
+
                </input>
             </label>
             </div>
 
         )
-
-    }
-   
-
-    
-    // useEffect(() => {
-    //     storeBags()
-        
-        
-        
-        
-
-    // }, [])
-
-    function setCurrentBag(value) {
-       //value has the format of "disa,bagtype"
-       // we need to split it into two variables name and type in that order
-         var name = value.split(",")[0]
-        var type = value.split(",")[1]
-        const bag = {name: name, type: type};
-        setBag(bag);
         
     }
-    
-   function drpdown() {
+
 
         var renderData = dataName ? dataName.data.map((item) => {
         const all_products = item.name
@@ -266,16 +248,15 @@ const FormUI = () => {
         )
         
   }): "";
+
   
-   return renderData;
-   
-   }
+
 
    const routeToHome = () => {
     navigate("/")
   }
   
-  
+
     return (
        <>
          < Header/>
@@ -283,21 +264,24 @@ const FormUI = () => {
             
             <div id="hero-image">
                 <div id="hero-text">
-                <h1 id="header" style={{ fontSize: "50px"}}>GRAPH DATA FORM</h1>
+                <h1 id="header" style={{ fontSize: "50px" }}>PIE CHART FORM</h1>
                      
                 </div>
              </div>
                 
                 <h3 ref={scrollRef} id="header-products" style={{ fontSize: "20px" }}>Products</h3>
                 
+
                     <select id="dropdown"style={{ textAlign:'center'}} value={productValue} onChange={e=> {fetchData(e.target.value);setValue(e.target.value); setCurrentBag(e.target.value); handleChange();toggleClass(e.target.value) }} >
                     <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
                     {drpdown()}
                     
                     </select>
                     
-                    <h1 id={bagState.name} >{bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
-                   
+              
+                    
+                    <h1>{bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
+
                    
                     <br></br>
                         {isHoveringFirstGraph && (
@@ -309,6 +293,7 @@ const FormUI = () => {
 
 
                     
+                <h1>{bagState.name}</h1>
                     
             {renderData()}
             {ComparisonData()}
