@@ -28,6 +28,7 @@ const FormUI = () => {
     const [productValue, setValue] = useState("");
     const [bag, setBag] = useState();
     const [newBag, setNewBag] = useState("");
+    const scrollRef = useRef(null);
 
     const bagState = useAppSelector((state) => state.bag);
     const dispatch = useAppDispatch();
@@ -122,6 +123,11 @@ const FormUI = () => {
             { type: "Packaging", amount: parseInt(inputRef.current[5].value), color: colorRef.current[5].value},
             { type: "Details", amount: parseInt(inputRef.current[6].value), color: colorRef.current[6].value },
             
+
+          ]}).then((res) => {
+
+          });
+
        ]
         api.updateBag({
             name: bagState.name,
@@ -135,23 +141,28 @@ const FormUI = () => {
         dispatch(editComparisonData(comparisonInput.current.value))
         navigate("/transparency")
 
+
         }
-        
+    
+    
+
     const handleChange = () => {
         setData(data)
-        
-        
 
+        scrollRef.current.scrollIntoView();
+
+        
+       
     }
     const [isActive, setActive] = useState(false);
 
     const toggleClass = () => {
         setActive(true);
+
+    }     
+
+
     }
-    
-   
-    
-    
 
 
     function renderData() {
@@ -164,7 +175,7 @@ const FormUI = () => {
                     <label key={index}>
                      {item.type} (kg CO2E) 
                      <br></br>
-                    <input type="number" step="0.001" min="0.001"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount} value={item.value}>
+                    <input type="number" step="0.001" min="0.000"  ref={(ref) => (inputRef.current[index] = ref)} key ={item.amount} defaultValue={item.amount} placeholder={item.amount} value={item.value}>
                     </input>
                     
                     </label>
@@ -208,10 +219,14 @@ const FormUI = () => {
                                <img id='b' src={piechart3Background} alt='img' width={470} height={350}></img>
 
                            </div>
-                       )}
+
+                       )}         
+                <br></br>
+              
 
 
                <input type="number" step="0.001" min="0.001" ref={comparisonInput} defaultValue={bagState.comparisonData}>        
+
                </input>
             </label>
             </div>
@@ -220,6 +235,20 @@ const FormUI = () => {
         
     }
 
+
+        var renderData = dataName ? dataName.data.map((item) => {
+        const all_products = item.name
+        const type = item.type
+     
+        
+        return (
+            
+            <option value= {[all_products, type]}> {all_products} {type}</option>
+                
+        )
+        
+  }): "";
+
   
 
 
@@ -227,7 +256,7 @@ const FormUI = () => {
     navigate("/")
   }
   
-   
+
     return (
        <>
          < Header/>
@@ -240,10 +269,19 @@ const FormUI = () => {
                 </div>
              </div>
                 
-                <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
+                <h3 ref={scrollRef} id="header-products" style={{ fontSize: "20px" }}>Products</h3>
                 
+
+                    <select id="dropdown"style={{ textAlign:'center'}} value={productValue} onChange={e=> {fetchData(e.target.value);setValue(e.target.value); setCurrentBag(e.target.value); handleChange();toggleClass(e.target.value) }} >
+                    <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
+                    {drpdown()}
+                    
+                    </select>
+                    
+              
                     
                     <h1>{bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
+
                    
                     <br></br>
                         {isHoveringFirstGraph && (
