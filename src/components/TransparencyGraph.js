@@ -323,7 +323,7 @@ const TransparencyGraph = ({}) => {
         dispatch(editTransparencyData(transparency))
    
        
-        navigate("/form")
+        navigate("/")
     }
 
     return (

@@ -18,6 +18,19 @@ right:20%;
 color: white;
 
 }  
+#headerName{
+  position: absolute;
+  top:50%;
+  bottom:40%;
+  left:20%;
+  right:20%;
+  color: white;
+  background-color: #555555;
+  height: 100px;
+  padding-top: 15px;
+  
+  
+}
 
 select {
 padding:11px;
@@ -117,6 +130,10 @@ display: block;
   
  
 }
+#addProductBtn{
+  margin:auto;
+}
+
 
 .swatch {
   width: 28px;
@@ -182,6 +199,12 @@ margin-top: 50px;
 @media screen and (max-width: 500px) {
 #dropdown{
   width: 75%;
+}
+#headerName{
+  height: 155px;
+}
+#homeHeader{
+ margin-left: 5%;
 }
 }
 
@@ -350,10 +373,7 @@ color: red;
 #header {
   position: absolute;
   top:18%;
-
   color: white;
 
 } 
 }
-
-

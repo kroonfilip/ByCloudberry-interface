@@ -26,18 +26,14 @@ function Header () {
   return (
     <header className='homeHeader'>
         <nav>
-        <ul>
+        <ul id='homeHeader'>
           <li>
           <NavLink to='/'>
                 HOME
             </NavLink>
             </li>
 
-            <li>
-            <NavLink to='/form'>
-              GRAPHDATA
-            </NavLink>
-          </li>
+        
           <li>
             <NavLink to='/settings'>
               SETTINGS

@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../context/hooks';
 import { setBagState } from '../context/bagSlice';
 import api from './Api';
 
+
+
 function Home () {
   const [data, setData] = useState("");
   const [dataName, setDataName] = useState("");
@@ -31,25 +33,7 @@ const fetchDatabyName = async () => {
   setDataName(resp)
   return resp
 }
-/*
-const handleSubmit = (value) => {
-  
-  console.log(value)
-  console.log(newDataName[0])
-  
-  console.log("POST" + newDataName[0], typeValue)
-  console.log("BAG AND TYPE" + newDataName[0], typeValue)
-  
-  
-  api.postNewBag({name: newDataName[0], bagtype: typeValue}
-    
-    ).then((res) => {
-     console.log(res)
-    });
-  
-}
 
-  */  
 const fetchData = async(value) => {
   //value has the format of "disa,handbag"
   //we need to split it into two variables, name and type
@@ -94,24 +78,40 @@ const handleOnChange = (e) => {
   setInputValues({ ...e.target.value, ...abc });
   console.log(inputValues)
 };
+
+
+
+  
+  
   
 
-const handleInput= (e) => {
-  if(e.key === 'Enter'){
-    console.log(inputValues[0])
-    console.log("val"+typeValue)
-    setNewDataName(inputValues)
-    api.postNewBag({
+const handleInput= (e) => { 
+  
+    const i = dataName.data.some((item) => {
+    if(item.name.includes(inputValues[0])) {
+      alert(`The name ${inputValues[0]} already exist. Pick another name`)
+     
+  }
+})
+      console.log(dataName)
+      console.log(inputValues[0])
+      console.log("val"+typeValue)
+      setNewDataName(inputValues)
+      api.postNewBag({
       name: inputValues[0],
       bagtype: typeValue
     })
-    
-    console.log("ny väska")
-
-    
-
+  
   }
-}
+
+  
+
+  
+  
+  
+  
+  
+
 const [isActive, setActive] = useState(false);
 
     const toggleClass = () => {
@@ -127,25 +127,22 @@ const routeToForm = () => {
     <>
     < Header/>
     <div id="hero-image">
+      
       <h3 id="header-products" style={{ fontSize: "20px" }}></h3>
+      
+      
+  
         <select id="dropdown"style={{ textAlign:'center'}}   onChange={e=> { routeToForm(); fetchData(e.target.value); }} >
         <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a product</option>
         {drpdown()}
         
         <option value={[inputValues, typeValue]}>{inputValues[0]} {typeValue}</option>;
           
-        
-      
-        
-        
-        
-        
-        
         </select>
                     
         <div id="add">
         <button style={{display: isActive ? 'none': 'inline-block'}} onClick={(e) => {handle(); toggleClass()}}>Add product</button>
-        <h3 style={{display: isActive? 'inline-block': 'none'}}>Submit new product by pressing enter</h3>
+       
 
         <select value ={typeValue} onChange = {e => {setTypeValue(e.target.value)}}style={{display: isActive? 'inline-block': 'none'}} >
         <option  value="" style={{ textAlign:'center', padding:'30px' }} disabled selected>Select a type</option>
@@ -156,12 +153,12 @@ const routeToForm = () => {
           <option>laptopcover</option>
           <option>wallet</option>
         </select>
+        
         {Array.from(Array(counter)).map((c, index) => {
           return (
             <input id='addProduct'
               onChange={handleOnChange}
               key={c}
-              onKeyPress={handleInput}
               className={index}
               type="text"
               maxLength={25}
@@ -169,9 +166,15 @@ const routeToForm = () => {
             ></input>
           );
         })}
+        <button id="addProductBtn"style={{display: isActive? 'block': 'none'}} 
+        onClick={e =>{toggleClass(); handleInput()}}>Add product</button>
+       
+        
+        
        
         </div>
     </div>
+    
     </>
   )
 }

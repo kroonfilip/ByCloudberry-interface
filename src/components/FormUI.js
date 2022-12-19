@@ -112,7 +112,11 @@ const FormUI = () => {
     
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        if(error) {
+            e.preventDefault()
+            alert("Form could not be submitted. Check the input fields")
+        }else{
+            e.preventDefault()
        const graphdata = [
             { type: "Leather", amount: parseInt(inputRef.current[0].value), color: colorRef.current[0].value},
             { type: "Production", amount: parseInt(inputRef.current[1].value), color: colorRef.current[1].value },
@@ -135,14 +139,16 @@ const FormUI = () => {
         dispatch(editComparisonData(comparisonInput.current.value))
         navigate("/transparency")
 
+
         }
         
-    const handleChange = () => {
-        setData(data)
+        }
+        
+    
         
         
 
-    }
+    
     const [isActive, setActive] = useState(false);
 
     const toggleClass = () => {
@@ -150,9 +156,20 @@ const FormUI = () => {
     }
     
    
+    const [error, setError] = useState(null);
     
-    
+    const checkColor = (e) => {
+        const newInput = e.target.value;
+    if (newInput.startsWith("#") && newInput.length == 7) {
+      setError(null);
+      colorRef.current.value = newInput;
+     
+    }else {
+        setError('Error: # is missing and is not containing 6 characters');
+        e.preventDefault()
+    }
 
+    }
 
     function renderData() {
             var renderData = bagState ? bagState.graphdata.map((item, index) => {
@@ -170,12 +187,14 @@ const FormUI = () => {
                     </label>
                     </div>
                     <div className='field'>
-                    <label key={index}>
+                   
+                    <label key={index} >
                     {item.type} (Hex color)
                     <br></br>
-                    <input ref={(ref) => (colorRef.current[index] = ref)} key={item.color} defaultValue={item.color}placeholder={item.color} value={item.value}></input>
+                    <p style= {{color: "red"}}> {error}</p>
+                    <input onChange = {checkColor}ref={(ref) => (colorRef.current[index] = ref)} key={item.color} defaultValue={item.color}placeholder={item.color} value={item.value}></input>
                     </label>
-                   
+                    
                     </div>
                    
                     </>
@@ -236,14 +255,14 @@ const FormUI = () => {
             <div id="hero-image">
                 <div id="hero-text">
                 <h1 id="header" style={{ fontSize: "50px" }}>PIE CHART FORM</h1>
+                <h3 id="headerName" style={{fontSize: "30px"}}> Selected product: <br></br>{bagState.name}</h3>
                      
                 </div>
              </div>
                 
-                <h3 id="header-products" style={{ fontSize: "20px" }}>Products</h3>
                 
                     
-                    <h1>{bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
+                    <h1 style={{fontSize: "20px", paddingTop:"15px"}}>Product: {bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
                    
                     <br></br>
                         {isHoveringFirstGraph && (
