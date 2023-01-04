@@ -49,6 +49,7 @@ function Home () {
       },
       
     })
+    console.log(resp)
     setData(resp)
     dispatch(setBagState(resp.data));
 

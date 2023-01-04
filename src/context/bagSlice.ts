@@ -16,12 +16,14 @@ export type Bag = {
     name: string;
     _id: string;
 
+    transparency: {
     bottomColor: string;
     topColor: string;
     onlineSEK: number;
     onlineEUR: number;
     retailSEK: number;
     retailEUR: number;
+    }
 
 }
 
@@ -40,12 +42,15 @@ const initialState: Bag = {
     ],
     name: "",
     _id: "",
+
+    transparency: {
     bottomColor: "",
     topColor: "",
     onlineSEK: 0,
     onlineEUR: 0,
     retailSEK: 0,
     retailEUR: 0,
+    }
 
 }
 
@@ -62,20 +67,23 @@ export const bagSlice = createSlice({
             state.comparisonData = action.payload.comparisonData;
             state.name = action.payload.name;
             state._id = action.payload._id;
-            console.log(state.name)
-            console.log(state.bottomColor + "BOTTOMCOLOR")
+
+            state.transparency = action.payload.transparency;
+
+            console.log(state.transparency)
+            
 
         },
         editGraphData: (state, action) => {
             state.graphdata = action.payload;
         },
         editTransparencyData: (state, action) => {
-            state.bottomColor = action.payload.bottomColor;
-            state.topColor = action.payload.topColor;
-            state.onlineSEK = action.payload.onlineSEK;
-            state.onlineEUR = action.payload.onlineEUR;
-            state.retailSEK = action.payload.retailSEK;
-            state.retailEUR = action.payload.retailEUR;
+            state.transparency.bottomColor = action.payload.bottomColor;
+            state.transparency.topColor = action.payload.topColor;
+            state.transparency.onlineSEK = action.payload.onlineSEK;
+            state.transparency.onlineEUR = action.payload.onlineEUR;
+            state.transparency.retailSEK = action.payload.retailSEK;
+            state.transparency.retailEUR = action.payload.retailEUR;
         },
         editComparisonData: (state, action) => {
             state.comparisonData = action.payload;
