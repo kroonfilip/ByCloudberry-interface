@@ -51,6 +51,7 @@ function Home () {
     })
     setData(resp)
     dispatch(setBagState(resp.data));
+    
     return resp
   }
   function drpdown() {

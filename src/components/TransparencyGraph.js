@@ -33,7 +33,7 @@ const TransparencyGraph = ({}) => {
     const [values, setValues] = useState(initialValues);
     const [error, setError] = useState(null);
     const [errorTop, setErrorTop] = useState(null); 
-    
+    const scrollRef = useRef(null)
 
     // useStates to handle the information icons and to display them on hover.
     const [isHoveringBottom, setIsHoveringBottom] = useState(false);
@@ -287,6 +287,7 @@ const TransparencyGraph = ({}) => {
     useEffect(() => {
         // enables to check every user input for the error handling
         checkColor()
+        handleScroll()
     }, [values])
 
     const checkColor = (e) => {
@@ -348,6 +349,9 @@ const TransparencyGraph = ({}) => {
     const routeToPrevious = () => {
         navigate("/form")
     }
+    const handleScroll = () => {
+        scrollRef.current.scrollIntoView({behavior: "smooth", block: "start"});
+    }
     return (
         <>
             <Header/>
@@ -358,7 +362,9 @@ const TransparencyGraph = ({}) => {
                      position:'relative', top:300}}>TRANSPARANCY DATA FORM</h1>
                 </div>
             </div>
-
+            
+            <h1 ref={scrollRef} style={{fontSize: "20px", paddingTop:"50px"}}>Product: {bagState.name} 
+            </h1>
             {renderOnlineData()}
             {renderRetailData()}
             {renderColorData()}

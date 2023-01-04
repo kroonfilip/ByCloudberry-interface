@@ -23,7 +23,7 @@ const FormUI = () => {
     const navigate = useNavigate()
     const [data, setData] = useState("");
     const [dataName, setDataName] = useState("");
-
+    const scrollRef = useRef(null)
     const bagState = useAppSelector((state) => state.bag);
     const dispatch = useAppDispatch();
 
@@ -112,7 +112,7 @@ const FormUI = () => {
         const colorPackaging = colorRef.current[5];
         const colorDetails = colorRef.current[6];
 
-       
+       handleScroll()
     }, []);
 
     const handleSubmit = (e) => {
@@ -214,7 +214,9 @@ const FormUI = () => {
     }): "";
     return renderData;
     }
-
+    const handleScroll = () => {
+        scrollRef.current.scrollIntoView({behavior: "smooth", block: "start"});
+    }
     function ComparisonData() {
         /*
         function that fetches the value from the state redux to be displayed in the 
@@ -259,7 +261,8 @@ const FormUI = () => {
                     <h3 id="headerName" style={{fontSize: "30px"}}> Selected product: <br></br>{bagState.name}</h3>
                     </div>
                 </div>
-                <h1 style={{fontSize: "20px", paddingTop:"15px"}}>Product: {bagState.name}  <img onMouseOver={handleMouseOverFirst} onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
+                <h1 ref={scrollRef} style={{fontSize: "20px", paddingTop:"50px"}}>Product: {bagState.name}  <img onMouseOver={handleMouseOverFirst} 
+                onMouseOut={handleMouseOutFirst} src={iIcon} width={15} height={15}></img></h1>
                 <br></br>
                 {isHoveringFirstGraph && (
                 <div>
