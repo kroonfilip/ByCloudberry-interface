@@ -341,10 +341,13 @@ const TransparencyGraph = ({}) => {
                 console.log(res)
             })
             dispatch(editTransparencyData(transparency))
+            alert("Form has been submitted")
             navigate("/")
         }
     }
-
+    const routeToPrevious = () => {
+        navigate("/form")
+    }
     return (
         <>
             <Header/>
@@ -362,7 +365,7 @@ const TransparencyGraph = ({}) => {
                 
             <div>
                 <button style={{display: true ? 'inline-block': 'none'}}
-                id="back-button" value='back'>Back</button>
+                id="back-button" onClick={routeToPrevious}value='back'>Back</button>
                 <button style={{display: true ? 'inline-block': 'none'}}
                 id="save-button" value='submit'>Save and continue</button>
             </div>

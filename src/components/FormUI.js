@@ -147,6 +147,7 @@ const FormUI = () => {
         })
         dispatch(editGraphData(graphdata))
         dispatch(editComparisonData(comparisonInput.current.value))
+        alert("Form has been submitted")
         navigate("/transparency")
         }
     }
