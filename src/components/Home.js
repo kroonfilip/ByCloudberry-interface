@@ -51,6 +51,8 @@ function Home () {
     })
     setData(resp)
     dispatch(setBagState(resp.data));
+
+    console.log(bagState.bottomColor)
     
     return resp
   }
@@ -109,6 +111,10 @@ function Home () {
     name: inputValues[0],
     bagtype: typeValue
   })
+
+    setTimeout(() => {
+      window.location.reload(false)
+    }, 500);
   }
 
   const [isActive, setActive] = useState(false);

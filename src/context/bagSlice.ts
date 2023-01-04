@@ -63,6 +63,7 @@ export const bagSlice = createSlice({
             state.name = action.payload.name;
             state._id = action.payload._id;
             console.log(state.name)
+            console.log(state.bottomColor + "BOTTOMCOLOR")
 
         },
         editGraphData: (state, action) => {
@@ -79,7 +80,8 @@ export const bagSlice = createSlice({
         editComparisonData: (state, action) => {
             state.comparisonData = action.payload;
             console.log(state.comparisonData)
-        }
+        },
+        
     },
 });
 
