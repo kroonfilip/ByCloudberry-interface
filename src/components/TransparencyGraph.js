@@ -214,8 +214,8 @@ const TransparencyGraph = ({}) => {
                     name='onlineSEK' 
                     onChange={handleInputChange} 
                     // value={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : values.onlineSEK}
-                    key={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : values.onlineSEK}
-                    defaultValue={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : values.onlineSEK}>
+                    key={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : ""}
+                    defaultValue={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : ""}>
                 </input>
                 <div>
                     <label style={{}}>
@@ -237,8 +237,8 @@ const TransparencyGraph = ({}) => {
                         name='onlineEUR' 
                         onChange={handleInputChange} 
                         // value={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : values.onlineEUR}
-                        key={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : values.onlineEUR}
-                        defaultValue={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : values.onlineEUR}>
+                        key={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : ""}
+                        defaultValue={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : ""}>
                     </input>        
                 </div>
             </div>
@@ -269,8 +269,8 @@ const TransparencyGraph = ({}) => {
                             onChange={handleInputChange} 
                             id='inputTransparency' type="number" step="1" min="1" 
                             // value={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : values.retailSEK}
-                            key={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : values.retailSEK}
-                            defaultValue={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : values.retailSEK}>
+                            key={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : ""}
+                            defaultValue={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : ""}>
                             </input>
                     </div>
                     <div>
@@ -289,8 +289,8 @@ const TransparencyGraph = ({}) => {
                             <input 
                             name='retailEUR' 
                             onChange={handleInputChange} 
-                            key={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : values.retailEUR}
-                            defaultValue={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : values.retailEUR}
+                            key={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : ""}
+                            defaultValue={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : ""}
                             id='inputTransparency' type="number" step="1" min="1" 
                             // value={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : values.retailEUR}
                             >
@@ -326,7 +326,7 @@ const TransparencyGraph = ({}) => {
         }else {
             setErrorTop('Error: # is missing and is not containing 6 characters');
         }
-
+        
     }
    
     const handleSubmit = (e) => {
