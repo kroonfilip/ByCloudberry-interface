@@ -159,7 +159,8 @@ const TransparencyGraph = ({}) => {
                     onChange={handleInputChange} 
                     defaultValue={bagState.transparency.bottomColor ? bagState.transparency.bottomColor : values.bottomColor}
                     key={bagState.transparency.bottomColor ? bagState.transparency.bottomColor : values.bottomColor}
-                    value={bagState.transparency.bottomColor ? bagState.transparency.bottomColor : values.bottomColor} >
+                    // value={bagState.transparency.bottomColor ? bagState.transparency.bottomColor : values.bottomColor} 
+                    >
                     </input>
                 </label>
             </div>
@@ -181,7 +182,8 @@ const TransparencyGraph = ({}) => {
                     onChange={handleInputChange} 
                     defaultValue={bagState.transparencytopColor ? bagState.transparency.topColor : values.topColor}
                     key={bagState.transparency.topColor ? bagState.transparency.topColor : values.topColor}
-                    value={bagState.transparency.topColor ? bagState.transparency.topColor : values.topColor} >
+                    // value={bagState.transparency.topColor ? bagState.transparency.topColor : values.topColor} 
+                    >
                     </input>
                 </label>
             </div>        
@@ -211,7 +213,7 @@ const TransparencyGraph = ({}) => {
                     step="1"
                     name='onlineSEK' 
                     onChange={handleInputChange} 
-                    value={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : values.onlineSEK}
+                    // value={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : values.onlineSEK}
                     key={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : values.onlineSEK}
                     defaultValue={bagState.transparency.onlineSEK ? bagState.transparency.onlineSEK : values.onlineSEK}>
                 </input>
@@ -234,7 +236,7 @@ const TransparencyGraph = ({}) => {
                         type='number'
                         name='onlineEUR' 
                         onChange={handleInputChange} 
-                        value={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : values.onlineEUR}
+                        // value={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : values.onlineEUR}
                         key={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : values.onlineEUR}
                         defaultValue={bagState.transparency.onlineEUR ? bagState.transparency.onlineEUR : values.onlineEUR}>
                     </input>        
@@ -266,7 +268,7 @@ const TransparencyGraph = ({}) => {
                             name='retailSEK'
                             onChange={handleInputChange} 
                             id='inputTransparency' type="number" step="1" min="1" 
-                            value={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : values.retailSEK}
+                            // value={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : values.retailSEK}
                             key={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : values.retailSEK}
                             defaultValue={bagState.transparency.retailSEK ? bagState.transparency.retailSEK : values.retailSEK}>
                             </input>
@@ -290,7 +292,8 @@ const TransparencyGraph = ({}) => {
                             key={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : values.retailEUR}
                             defaultValue={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : values.retailEUR}
                             id='inputTransparency' type="number" step="1" min="1" 
-                            value={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : values.retailEUR}>
+                            // value={bagState.transparency.retailEUR ? bagState.transparency.retailEUR : values.retailEUR}
+                            >
                             </input>
                         </div>
                 </div>
