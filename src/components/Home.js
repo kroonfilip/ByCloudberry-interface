@@ -110,7 +110,16 @@ function Home () {
     setNewDataName(inputValues)
     api.postNewBag({
     name: inputValues[0],
-    bagtype: typeValue
+    bagtype: typeValue,
+    transparency: {
+      bottomColor: "#FFFFFF",
+      topColor: "#FFFFFF",
+      onlineSEK: 0,
+      onlineEUR: 0,
+      retailSEK: 0,
+      retailEUR: 0,
+
+    }
   })
 
     setTimeout(() => {
