@@ -111,6 +111,15 @@ function Home () {
     api.postNewBag({
     name: inputValues[0],
     bagtype: typeValue,
+    graphdata: [
+      {amount: 1, color: "#618985", type: "Leather"},
+      {amount: 1, color: "#96BBBB", type: "Production"},
+      {amount: 1, color: "#1D1C1C", type: "Logistics"},
+      {amount: 1, color: "#6A4D3A", type: "Recycling"},
+      {amount: 1, color: "#414535", type: "Lining"},
+      {amount: 1, color: "#C19875", type: "Packaging"},
+      {amount: 1, color: "#F2E3BC", type: "Details"},
+    ],
     transparency: {
       bottomColor: "#FFFFFF",
       topColor: "#FFFFFF",
